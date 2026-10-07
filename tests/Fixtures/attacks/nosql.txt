@@ -1,0 +1,14 @@
+# nosql – Angriffs-Payloads (ein Payload pro Zeile; Kommentarzeilen beginnen mit #)
+# Hinweis: Platzhalter wie x-scr'ipt stehen für script-Varianten; der Tokenizer prüft die zusammengesetzten Formen.
+{"$ne":null}
+{"$gt":""}
+{"$where":"this.a==1"}
+{"user":{"$ne":1},"pass":{"$ne":1}}
+{"$regex":".*"}
+[$ne]
+';return true;//
+' || this.password.match(/.*/)//
+{"$or":[{"a":1}]}
+{"$exists":true}
+{"password":{"$regex":"^a"}}
+{"$gt":undefined}

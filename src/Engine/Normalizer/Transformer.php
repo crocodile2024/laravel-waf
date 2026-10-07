@@ -112,7 +112,7 @@ final class Transformer
     public static function urlDecodeUni(string $value): string
     {
         for ($i = 0; $i < 3; $i++) {
-            if (! str_contains($value, '%') && ! str_contains($value, '+')) {
+            if (! str_contains($value, '%')) {
                 break;
             }
             $decoded = (string) preg_replace_callback(
@@ -120,7 +120,9 @@ final class Transformer
                 static fn (array $m): string => mb_chr((int) hexdec($m[1]), 'UTF-8') ?: '',
                 $value,
             );
-            $decoded = urldecode($decoded);
+            // rawurldecode: lässt literale „+“ unangetastet (relevant für MSSQL-Konkatenation),
+            // da Laravel „+“ aus Query/Form bereits als Leerzeichen geparst hat.
+            $decoded = rawurldecode($decoded);
             if ($decoded === $value) {
                 break;
             }

@@ -1,0 +1,13 @@
+# adressen-emails – gutartige Eingaben (bei Paranoia 1 null Treffer erwartet)
+max.mustermann@example.de
+info@platinen-helfer.de
+support+tickets@firma.co.uk
+Telefon: +49 30 12345678
+IBAN: DE89 3704 0044 0532 0130 00 (Beispiel)
+Vorwahl 0221 / 1234567
+PLZ 50667 Köln
+https://www.example.de/produkte?id=42&sort=preis
+Besuchen Sie uns unter example.com/kontakt
+user_name@sub.domain.example.org
+Lieferadresse: Hauptstr. 1a, 10115 Berlin
+USt-IdNr.: DE123456789

@@ -1,0 +1,9 @@
+# formular-json – gutartige Eingaben (bei Paranoia 1 null Treffer erwartet)
+{"name":"Max Mustermann","email":"max@example.de","nachricht":"Bitte rufen Sie mich zurück."}
+{"artikel":[{"id":42,"menge":2},{"id":99,"menge":1}],"gesamt":29.97}
+{"filter":{"kategorie":"elektronik","preis_max":100}}
+{"user":{"address":{"street":"Hauptstraße","city":"Köln"}}}
+{"kommentar":"Super Service, gerne wieder! 5 Sterne."}
+{"suche":"laptop 16gb ram","sortierung":"preis_aufsteigend"}
+{"datum":"2024-08-15","uhrzeit":"14:30","teilnehmer":12}
+{"text":"Die Summe aus 2 und 3 ist 5."}

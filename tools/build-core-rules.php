@@ -107,7 +107,7 @@ $rules[] = rule('WAF-XSS-005', 'XSS (Kontextanalyse)', 'HTML-Kontextanalyse auf 
 $rules[] = rule('WAF-XSS-006', 'srcdoc-Attribut', 'Erkennt srcdoc= (eingebettete HTML-Dokumente).', 'critical', 1, 205, $xs, $TX,
     anyRegex($ARGS, '<[^>]*\bsrcdoc\s*='));
 $rules[] = rule('WAF-XSS-007', 'Client-seitige Template-Injection', 'Erkennt {{…}}/${…} mit Zugriff auf Konstruktoren oder globale Objekte.', 'critical', 1, 206, $xs, $TX,
-    anyRegex($ARGS, '\{\{[^}]{0,200}?(?:constructor|__proto__|\$on|\$eval|\$emit|_c\.|_v\.|\balert\s*\(|\bprompt\s*\(|\bconfirm\s*\(|\beval\s*\(|\bwindow\b|\bdocument\b|\bprocess\b|\brequire\b|\bglobal\b|\bfunction\s*\(|\bimport\s*\(|\[\s*[\'"]\w|toString|valueOf|\bself\b|this\.|\bnew\s)|\$\{[^}]{0,200}?(?:\balert\s*\(|\beval\s*\(|\bprocess\b|\brequire\s*\(|constructor|\bdocument\b|\bwindow\b|\bnew\s+\w|import\s*\(|\bfetch\s*\()|\{\{\s*\d+\s*[*+]\s*\d+\s*\}\}|\$\{\s*\d+\s*[*+]\s*\d+\s*\}|#\{\s*\d+\s*[*+]\s*\d+\s*\}|\{%\s*(?:import|include|set|for|if|debug|load)\b|\{\{\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\b|<%=?\s*[\w$]+\s*(?:\(|\.|\[)'));
+    anyRegex($ARGS, '\{\{[^}]{0,200}?(?:constructor|__proto__|\$on|\$eval|\$emit|_c\.|_v\.|\balert\s*\(|\bprompt\s*\(|\bconfirm\s*\(|\beval\s*\(|\bwindow\b|\bdocument\b|\bprocess\b|\brequire\b|\bglobal\b|\bfunction\s*\(|\bimport\s*\(|\[\s*[\'"]\w|toString|valueOf|\bself\b|this\.|\bnew\s)|\$\{[^}]{0,200}?(?:\balert\s*\(|\beval\s*\(|\bprocess\b|\brequire\s*\(|constructor|\bdocument\b|\bwindow\b|\bnew\s+\w|import\s*\(|\bfetch\s*\()|\{\{\s*\d+\s*[*+]\s*\d+\s*\}\}|\$\{\s*\d+\s*[*+]\s*\d+\s*\}|#\{\s*\d+\s*[*+]\s*\d+\s*\}|\{%\s*(?:import|include|set|for|if|debug|load)\b|\{\{\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\b|<%=?\s*[\w$]+\s*(?:\(|\.|\[)|<%[=\-]?[^%]{0,200}?(?:\d+\s*[*+]\s*\d+|system|exec|eval|`|\bprocess\b|open\s*\(|%x\[|\.read\b)[^%]*%>'));
 $rules[] = rule('WAF-XSS-008', 'CSS-Ausdrücke', 'Erkennt expression(), -moz-binding, behavior: und @import mit javascript:.', 'error', 1, 207, $xs, [...$TX, 'cssDecode', 'removeComments'],
     anyRegex($ARGS, '\bexpression\s*\(|-moz-binding\s*:|\bbehavior\s*:\s*url|@import\s+[\'"]?\s*(?:javascript|data):|url\s*\(\s*[\'"]?\s*(?:javascript|vbscript):'));
 $rules[] = rule('WAF-XSS-009', 'Attributausbruch mit Tag', 'Erkennt "><tag- und \'><tag-Muster.', 'error', 2, 220, $xs, $TX,
@@ -124,7 +124,7 @@ $lf = ['lfi', 'owasp-a01'];
 $rules[] = rule('WAF-LFI-001', 'Path Traversal', 'Erkennt mehrstufige ../-Sequenzen (auch kodiert).', 'critical', 1, 300, $lf, [...$TP, 'utf8Normalize'],
     anyRegex(['args.*', 'uri', 'cookie.*'], '\.{2,3}[\\\\/]{1,3}\.{2,3}[\\\\/]|(?:^|[\\\\/=])\.{2,3}[\\\\/;]{1,3}[\w.\-/\\\\]{0,200}?(?:etc|proc|windows|winnt|boot|var|usr|root|home|tmp|dev|bin|sys|inetpub|system32|\.ssh|\.env|wp-config|config|\.git)|\.\.;[\\\\/]'));
 $rules[] = rule('WAF-LFI-002', 'Zugriff auf Systemdateien', 'Erkennt /etc/passwd, /proc/self/environ, win.ini, .htpasswd u. Ä.', 'critical', 1, 301, $lf, $TP,
-    anyRegex(['args.*', 'uri', 'cookie.*'], '/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\.conf|apache2?/|nginx/|httpd/|mysql/|php\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\bboot\.ini\b|\bwin\.ini\b|\bsystem\.ini\b|/windows/(?:system32|win\.ini|repair)|/winnt/|\bsystem32/(?:drivers|config|cmd)|\.htpasswd\b|/\.ssh/(?:id_|authorized_keys|known_hosts)|\bid_(?:rsa|dsa|ecdsa|ed25519)\b|\.bash_history\b|/root/\.|\bwp-config\.php\b|/\.aws/credentials|/\.docker/config|/\.kube/config|/storage/logs/laravel\.log'));
+    anyRegex(['args.*', 'uri', 'cookie.*'], '/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\.conf|apache2?/|nginx/|httpd/|mysql/|php\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\bboot\.ini\b|\bwin\.ini\b|\bsystem\.ini\b|/windows/(?:system32|win\.ini|repair)|/winnt/|\bsystem32/(?:drivers|config|cmd)|\.htpasswd\b|/\.ssh/(?:id_|authorized_keys|known_hosts)|\bid_(?:rsa|dsa|ecdsa|ed25519)\b|\.bash_history\b|/root/\.|\bwp-config\.php\b|/\.aws/credentials|/\.docker/config|/\.kube/config|/storage/logs/laravel\.log|/var/www/|/home/[\w.-]+/|(?:^|[\\\\/])\.env(?:[.\\\\/]|$)'));
 $rules[] = rule('WAF-LFI-003', 'PHP-Stream-Wrapper', 'Erkennt php://, phar://, zip://, data://, expect://, glob:// u. Ä.', 'critical', 1, 302, $lf, $T,
     anyRegex(['args.*', 'cookie.*', 'uri'], '\b(?:php|phar|zip|zlib|data|expect|glob|compress\.zlib|compress\.bzip2|ogg|rar|ssh2(?:\.\w+)?)://'));
 $rules[] = rule('WAF-LFI-004', 'Einfaches Path Traversal', 'Erkennt einzelne ../-Sequenzen (Paranoia 2).', 'warning', 2, 310, $lf, $TP,
@@ -173,7 +173,7 @@ $rules[] = rule('WAF-PHP-001', 'PHP-Code-Tag', 'Erkennt <?php und <?= in Paramet
 $rules[] = rule('WAF-PHP-002', 'Serialisiertes PHP-Objekt', 'Erkennt O:n:"Klasse":-Muster (Object Injection).', 'critical', 1, 601, $ph, ['urlDecodeUni', 'base64DecodeIfValid', 'removeNulls', 'lowercase'],
     anyRegex(['args.*', 'cookie.*', 'raw_body'], '(?:^|[;{}:\s"\'])[oc]:\+?\d+:"[a-z0-9_\\\\\x7f-\xff]+":\+?\d+:\{|(?:^|[;{])a:\d+:\{(?:[isbdo]:\d*:?[^;]*;){0,6}[oc]:\d+:"'));
 $rules[] = rule('WAF-PHP-003', 'Gefährliche PHP-Funktionen', 'Erkennt eval(, assert(, system(, shell_exec( u. Ä.', 'critical', 1, 602, $ph, [...$T, 'removeComments'],
-    anyRegex(['args.*', 'cookie.*', 'header.user-agent'], '(?<![.\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|call_user_func(?:_array)?|array_map|usort|preg_replace|ob_start|register_shutdown_function|getenv|putenv|ini_set|dl|symlink|posix_\w+|escapeshellcmd|unserialize)\s*\(\s*(?:\$|[\'"`]|@|\(|base64|gz|str_rot|chr\s*\(|\w+\s*\()'));
+    anyRegex(['args.*', 'cookie.*', 'header.user-agent'], '(?<![.\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|register_shutdown_function|putenv|ini_set|symlink|escapeshellcmd|unserialize)\s*\(\s*(?:\$|[\'"`]|@|\(|base64|gz|str_rot|chr\s*\(|\w+\s*\()'));
 $rules[] = rule('WAF-PHP-004', 'PHP-Superglobale und Variablenfunktionen', 'Erkennt $_GET/$_POST/$_SERVER-Zugriffe und ${…}-Konstrukte.', 'error', 1, 603, $ph, $T,
     anyRegex(['args.*', 'cookie.*'], '\$_(?:get|post|request|cookie|server|files|env|session)\s*\[|\$\{\s*@?\$?_?\w+\s*\(|\$\w+\s*\(\s*\$_|\$globals\s*\[|\b(?:include|require)(?:_once)?\s*\(?\s*[\'"](?:php|https?|ftp|data|zip|phar|expect)://'));
 $rules[] = rule('WAF-PHP-005', 'PHP-Funktionen (breit)', 'Erkennt weitere PHP-Funktionsaufrufe (Paranoia 2).', 'warning', 2, 610, $ph, $T,
@@ -221,7 +221,7 @@ $rules[] = rule('WAF-PROTO-020', 'CRLF-Injektion (Response Splitting)', 'Erkennt
 $rules[] = rule('WAF-PROTO-021', 'Ungültige Zeichen im Pfad', 'Erkennt Steuerzeichen im Pfad.', 'error', 1, 61, $pr, ['urlDecodeUni'],
     anyRegex(['path'], '[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]'));
 $rules[] = rule('WAF-PROTO-022', 'HTTP Request Smuggling', 'Erkennt verschachtelte HTTP-Anfragen in Parametern oder im Body.', 'critical', 1, 62, $pr, ['urlDecodeUni', 'lowercase'],
-    anyRegex(['args.*', 'raw_body'], '(?:^|[\r\n])(?:get|post|put|delete|head|options|patch)\s+/\S*\s+http/\d\.\d[\r\n]'));
+    anyRegex(['args.*', 'raw_body'], '(?:^|[\r\n])(?:get|post|put|delete|head|options|patch)\s+/\S*\s+http/\d\.\d\b'));
 
 // ---------------------------------------------------------------- JNDI
 $jn = ['jndi', 'log4shell', 'owasp-a06'];
@@ -237,7 +237,7 @@ $rules[] = rule('WAF-PPOL-001', 'Prototype Pollution (__proto__)', 'Erkennt __pr
         ['target' => 'args_names', 'operator' => 'regex', 'value' => '__proto__'],
         ['target' => 'uri', 'operator' => 'regex', 'value' => '__proto__'],
         ['target' => 'raw_body', 'operator' => 'regex', 'value' => '["\']__proto__["\']\s*:'],
-        ['target' => 'args.*', 'operator' => 'regex', 'value' => '["\']__proto__["\']\s*:|\[\s*["\']?__proto__["\']?\s*\]|\.__proto__\.'],
+        ['target' => 'args.*', 'operator' => 'regex', 'value' => '["\']__proto__["\']\s*:|\[\s*["\']?__proto__["\']?\s*\]|\.__proto__\.|\b__proto__\b'],
     ]]);
 $rules[] = rule('WAF-PPOL-002', 'Prototype Pollution (constructor.prototype)', 'Erkennt constructor.prototype als Schlüsselpfad.', 'critical', 1, 951, $pp, ['urlDecodeUni', 'lowercase'],
     ['match' => 'any', 'items' => [

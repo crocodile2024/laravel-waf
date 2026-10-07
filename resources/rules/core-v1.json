@@ -1171,17 +1171,17 @@
                     {
                         "target": "args.*",
                         "operator": "regex",
-                        "value": "\\{\\{[^}]{0,200}?(?:constructor|__proto__|\\$on|\\$eval|\\$emit|_c\\.|_v\\.|\\balert\\s*\\(|\\bprompt\\s*\\(|\\bconfirm\\s*\\(|\\beval\\s*\\(|\\bwindow\\b|\\bdocument\\b|\\bprocess\\b|\\brequire\\b|\\bglobal\\b|\\bfunction\\s*\\(|\\bimport\\s*\\(|\\[\\s*['\"]\\w|toString|valueOf|\\bself\\b|this\\.|\\bnew\\s)|\\$\\{[^}]{0,200}?(?:\\balert\\s*\\(|\\beval\\s*\\(|\\bprocess\\b|\\brequire\\s*\\(|constructor|\\bdocument\\b|\\bwindow\\b|\\bnew\\s+\\w|import\\s*\\(|\\bfetch\\s*\\()|\\{\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}\\}|\\$\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|#\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|\\{%\\s*(?:import|include|set|for|if|debug|load)\\b|\\{\\{\\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\\b|<%=?\\s*[\\w$]+\\s*(?:\\(|\\.|\\[)"
+                        "value": "\\{\\{[^}]{0,200}?(?:constructor|__proto__|\\$on|\\$eval|\\$emit|_c\\.|_v\\.|\\balert\\s*\\(|\\bprompt\\s*\\(|\\bconfirm\\s*\\(|\\beval\\s*\\(|\\bwindow\\b|\\bdocument\\b|\\bprocess\\b|\\brequire\\b|\\bglobal\\b|\\bfunction\\s*\\(|\\bimport\\s*\\(|\\[\\s*['\"]\\w|toString|valueOf|\\bself\\b|this\\.|\\bnew\\s)|\\$\\{[^}]{0,200}?(?:\\balert\\s*\\(|\\beval\\s*\\(|\\bprocess\\b|\\brequire\\s*\\(|constructor|\\bdocument\\b|\\bwindow\\b|\\bnew\\s+\\w|import\\s*\\(|\\bfetch\\s*\\()|\\{\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}\\}|\\$\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|#\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|\\{%\\s*(?:import|include|set|for|if|debug|load)\\b|\\{\\{\\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\\b|<%=?\\s*[\\w$]+\\s*(?:\\(|\\.|\\[)|<%[=\\-]?[^%]{0,200}?(?:\\d+\\s*[*+]\\s*\\d+|system|exec|eval|`|\\bprocess\\b|open\\s*\\(|%x\\[|\\.read\\b)[^%]*%>"
                     },
                     {
                         "target": "cookie.*",
                         "operator": "regex",
-                        "value": "\\{\\{[^}]{0,200}?(?:constructor|__proto__|\\$on|\\$eval|\\$emit|_c\\.|_v\\.|\\balert\\s*\\(|\\bprompt\\s*\\(|\\bconfirm\\s*\\(|\\beval\\s*\\(|\\bwindow\\b|\\bdocument\\b|\\bprocess\\b|\\brequire\\b|\\bglobal\\b|\\bfunction\\s*\\(|\\bimport\\s*\\(|\\[\\s*['\"]\\w|toString|valueOf|\\bself\\b|this\\.|\\bnew\\s)|\\$\\{[^}]{0,200}?(?:\\balert\\s*\\(|\\beval\\s*\\(|\\bprocess\\b|\\brequire\\s*\\(|constructor|\\bdocument\\b|\\bwindow\\b|\\bnew\\s+\\w|import\\s*\\(|\\bfetch\\s*\\()|\\{\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}\\}|\\$\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|#\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|\\{%\\s*(?:import|include|set|for|if|debug|load)\\b|\\{\\{\\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\\b|<%=?\\s*[\\w$]+\\s*(?:\\(|\\.|\\[)"
+                        "value": "\\{\\{[^}]{0,200}?(?:constructor|__proto__|\\$on|\\$eval|\\$emit|_c\\.|_v\\.|\\balert\\s*\\(|\\bprompt\\s*\\(|\\bconfirm\\s*\\(|\\beval\\s*\\(|\\bwindow\\b|\\bdocument\\b|\\bprocess\\b|\\brequire\\b|\\bglobal\\b|\\bfunction\\s*\\(|\\bimport\\s*\\(|\\[\\s*['\"]\\w|toString|valueOf|\\bself\\b|this\\.|\\bnew\\s)|\\$\\{[^}]{0,200}?(?:\\balert\\s*\\(|\\beval\\s*\\(|\\bprocess\\b|\\brequire\\s*\\(|constructor|\\bdocument\\b|\\bwindow\\b|\\bnew\\s+\\w|import\\s*\\(|\\bfetch\\s*\\()|\\{\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}\\}|\\$\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|#\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|\\{%\\s*(?:import|include|set|for|if|debug|load)\\b|\\{\\{\\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\\b|<%=?\\s*[\\w$]+\\s*(?:\\(|\\.|\\[)|<%[=\\-]?[^%]{0,200}?(?:\\d+\\s*[*+]\\s*\\d+|system|exec|eval|`|\\bprocess\\b|open\\s*\\(|%x\\[|\\.read\\b)[^%]*%>"
                     },
                     {
                         "target": "header.referer",
                         "operator": "regex",
-                        "value": "\\{\\{[^}]{0,200}?(?:constructor|__proto__|\\$on|\\$eval|\\$emit|_c\\.|_v\\.|\\balert\\s*\\(|\\bprompt\\s*\\(|\\bconfirm\\s*\\(|\\beval\\s*\\(|\\bwindow\\b|\\bdocument\\b|\\bprocess\\b|\\brequire\\b|\\bglobal\\b|\\bfunction\\s*\\(|\\bimport\\s*\\(|\\[\\s*['\"]\\w|toString|valueOf|\\bself\\b|this\\.|\\bnew\\s)|\\$\\{[^}]{0,200}?(?:\\balert\\s*\\(|\\beval\\s*\\(|\\bprocess\\b|\\brequire\\s*\\(|constructor|\\bdocument\\b|\\bwindow\\b|\\bnew\\s+\\w|import\\s*\\(|\\bfetch\\s*\\()|\\{\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}\\}|\\$\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|#\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|\\{%\\s*(?:import|include|set|for|if|debug|load)\\b|\\{\\{\\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\\b|<%=?\\s*[\\w$]+\\s*(?:\\(|\\.|\\[)"
+                        "value": "\\{\\{[^}]{0,200}?(?:constructor|__proto__|\\$on|\\$eval|\\$emit|_c\\.|_v\\.|\\balert\\s*\\(|\\bprompt\\s*\\(|\\bconfirm\\s*\\(|\\beval\\s*\\(|\\bwindow\\b|\\bdocument\\b|\\bprocess\\b|\\brequire\\b|\\bglobal\\b|\\bfunction\\s*\\(|\\bimport\\s*\\(|\\[\\s*['\"]\\w|toString|valueOf|\\bself\\b|this\\.|\\bnew\\s)|\\$\\{[^}]{0,200}?(?:\\balert\\s*\\(|\\beval\\s*\\(|\\bprocess\\b|\\brequire\\s*\\(|constructor|\\bdocument\\b|\\bwindow\\b|\\bnew\\s+\\w|import\\s*\\(|\\bfetch\\s*\\()|\\{\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}\\}|\\$\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|#\\{\\s*\\d+\\s*[*+]\\s*\\d+\\s*\\}|\\{%\\s*(?:import|include|set|for|if|debug|load)\\b|\\{\\{\\s*(?:config|request|self|cycler|joiner|namespace|lipsum|url_for|get_flashed_messages)\\b|<%=?\\s*[\\w$]+\\s*(?:\\(|\\.|\\[)|<%[=\\-]?[^%]{0,200}?(?:\\d+\\s*[*+]\\s*\\d+|system|exec|eval|`|\\bprocess\\b|open\\s*\\(|%x\\[|\\.read\\b)[^%]*%>"
                     }
                 ]
             },
@@ -1480,17 +1480,17 @@
                     {
                         "target": "args.*",
                         "operator": "regex",
-                        "value": "/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\\.conf|apache2?/|nginx/|httpd/|mysql/|php\\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\\bboot\\.ini\\b|\\bwin\\.ini\\b|\\bsystem\\.ini\\b|/windows/(?:system32|win\\.ini|repair)|/winnt/|\\bsystem32/(?:drivers|config|cmd)|\\.htpasswd\\b|/\\.ssh/(?:id_|authorized_keys|known_hosts)|\\bid_(?:rsa|dsa|ecdsa|ed25519)\\b|\\.bash_history\\b|/root/\\.|\\bwp-config\\.php\\b|/\\.aws/credentials|/\\.docker/config|/\\.kube/config|/storage/logs/laravel\\.log"
+                        "value": "/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\\.conf|apache2?/|nginx/|httpd/|mysql/|php\\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\\bboot\\.ini\\b|\\bwin\\.ini\\b|\\bsystem\\.ini\\b|/windows/(?:system32|win\\.ini|repair)|/winnt/|\\bsystem32/(?:drivers|config|cmd)|\\.htpasswd\\b|/\\.ssh/(?:id_|authorized_keys|known_hosts)|\\bid_(?:rsa|dsa|ecdsa|ed25519)\\b|\\.bash_history\\b|/root/\\.|\\bwp-config\\.php\\b|/\\.aws/credentials|/\\.docker/config|/\\.kube/config|/storage/logs/laravel\\.log|/var/www/|/home/[\\w.-]+/|(?:^|[\\\\/])\\.env(?:[.\\\\/]|$)"
                     },
                     {
                         "target": "uri",
                         "operator": "regex",
-                        "value": "/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\\.conf|apache2?/|nginx/|httpd/|mysql/|php\\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\\bboot\\.ini\\b|\\bwin\\.ini\\b|\\bsystem\\.ini\\b|/windows/(?:system32|win\\.ini|repair)|/winnt/|\\bsystem32/(?:drivers|config|cmd)|\\.htpasswd\\b|/\\.ssh/(?:id_|authorized_keys|known_hosts)|\\bid_(?:rsa|dsa|ecdsa|ed25519)\\b|\\.bash_history\\b|/root/\\.|\\bwp-config\\.php\\b|/\\.aws/credentials|/\\.docker/config|/\\.kube/config|/storage/logs/laravel\\.log"
+                        "value": "/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\\.conf|apache2?/|nginx/|httpd/|mysql/|php\\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\\bboot\\.ini\\b|\\bwin\\.ini\\b|\\bsystem\\.ini\\b|/windows/(?:system32|win\\.ini|repair)|/winnt/|\\bsystem32/(?:drivers|config|cmd)|\\.htpasswd\\b|/\\.ssh/(?:id_|authorized_keys|known_hosts)|\\bid_(?:rsa|dsa|ecdsa|ed25519)\\b|\\.bash_history\\b|/root/\\.|\\bwp-config\\.php\\b|/\\.aws/credentials|/\\.docker/config|/\\.kube/config|/storage/logs/laravel\\.log|/var/www/|/home/[\\w.-]+/|(?:^|[\\\\/])\\.env(?:[.\\\\/]|$)"
                     },
                     {
                         "target": "cookie.*",
                         "operator": "regex",
-                        "value": "/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\\.conf|apache2?/|nginx/|httpd/|mysql/|php\\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\\bboot\\.ini\\b|\\bwin\\.ini\\b|\\bsystem\\.ini\\b|/windows/(?:system32|win\\.ini|repair)|/winnt/|\\bsystem32/(?:drivers|config|cmd)|\\.htpasswd\\b|/\\.ssh/(?:id_|authorized_keys|known_hosts)|\\bid_(?:rsa|dsa|ecdsa|ed25519)\\b|\\.bash_history\\b|/root/\\.|\\bwp-config\\.php\\b|/\\.aws/credentials|/\\.docker/config|/\\.kube/config|/storage/logs/laravel\\.log"
+                        "value": "/etc/(?:passwd|shadow|group|hosts|issue|hostname|crontab|sudoers|motd|resolv\\.conf|apache2?/|nginx/|httpd/|mysql/|php\\d*/|ssh/|ssl/|environment|fstab|profile|bashrc)|/proc/(?:self|\\d+)/(?:environ|cmdline|fd|maps|status|mem|cwd|exe|root|mounts)|/var/log/(?:apache|nginx|httpd|auth|syslog|messages|secure|mail)|\\bboot\\.ini\\b|\\bwin\\.ini\\b|\\bsystem\\.ini\\b|/windows/(?:system32|win\\.ini|repair)|/winnt/|\\bsystem32/(?:drivers|config|cmd)|\\.htpasswd\\b|/\\.ssh/(?:id_|authorized_keys|known_hosts)|\\bid_(?:rsa|dsa|ecdsa|ed25519)\\b|\\.bash_history\\b|/root/\\.|\\bwp-config\\.php\\b|/\\.aws/credentials|/\\.docker/config|/\\.kube/config|/storage/logs/laravel\\.log|/var/www/|/home/[\\w.-]+/|(?:^|[\\\\/])\\.env(?:[.\\\\/]|$)"
                     }
                 ]
             },
@@ -2387,17 +2387,17 @@
                     {
                         "target": "args.*",
                         "operator": "regex",
-                        "value": "(?<![.\\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|call_user_func(?:_array)?|array_map|usort|preg_replace|ob_start|register_shutdown_function|getenv|putenv|ini_set|dl|symlink|posix_\\w+|escapeshellcmd|unserialize)\\s*\\(\\s*(?:\\$|['\"`]|@|\\(|base64|gz|str_rot|chr\\s*\\(|\\w+\\s*\\()"
+                        "value": "(?<![.\\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|register_shutdown_function|putenv|ini_set|symlink|escapeshellcmd|unserialize)\\s*\\(\\s*(?:\\$|['\"`]|@|\\(|base64|gz|str_rot|chr\\s*\\(|\\w+\\s*\\()"
                     },
                     {
                         "target": "cookie.*",
                         "operator": "regex",
-                        "value": "(?<![.\\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|call_user_func(?:_array)?|array_map|usort|preg_replace|ob_start|register_shutdown_function|getenv|putenv|ini_set|dl|symlink|posix_\\w+|escapeshellcmd|unserialize)\\s*\\(\\s*(?:\\$|['\"`]|@|\\(|base64|gz|str_rot|chr\\s*\\(|\\w+\\s*\\()"
+                        "value": "(?<![.\\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|register_shutdown_function|putenv|ini_set|symlink|escapeshellcmd|unserialize)\\s*\\(\\s*(?:\\$|['\"`]|@|\\(|base64|gz|str_rot|chr\\s*\\(|\\w+\\s*\\()"
                     },
                     {
                         "target": "header.user-agent",
                         "operator": "regex",
-                        "value": "(?<![.\\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|call_user_func(?:_array)?|array_map|usort|preg_replace|ob_start|register_shutdown_function|getenv|putenv|ini_set|dl|symlink|posix_\\w+|escapeshellcmd|unserialize)\\s*\\(\\s*(?:\\$|['\"`]|@|\\(|base64|gz|str_rot|chr\\s*\\(|\\w+\\s*\\()"
+                        "value": "(?<![.\\w>$:])(?:eval|assert|system|shell_exec|passthru|popen|proc_open|pcntl_exec|create_function|phpinfo|show_source|highlight_file|php_uname|base64_decode|gzinflate|gzuncompress|gzdecode|str_rot13|file_put_contents|move_uploaded_file|register_shutdown_function|putenv|ini_set|symlink|escapeshellcmd|unserialize)\\s*\\(\\s*(?:\\$|['\"`]|@|\\(|base64|gz|str_rot|chr\\s*\\(|\\w+\\s*\\()"
                     }
                 ]
             },
@@ -2979,12 +2979,12 @@
                     {
                         "target": "args.*",
                         "operator": "regex",
-                        "value": "(?:^|[\\r\\n])(?:get|post|put|delete|head|options|patch)\\s+/\\S*\\s+http/\\d\\.\\d[\\r\\n]"
+                        "value": "(?:^|[\\r\\n])(?:get|post|put|delete|head|options|patch)\\s+/\\S*\\s+http/\\d\\.\\d\\b"
                     },
                     {
                         "target": "raw_body",
                         "operator": "regex",
-                        "value": "(?:^|[\\r\\n])(?:get|post|put|delete|head|options|patch)\\s+/\\S*\\s+http/\\d\\.\\d[\\r\\n]"
+                        "value": "(?:^|[\\r\\n])(?:get|post|put|delete|head|options|patch)\\s+/\\S*\\s+http/\\d\\.\\d\\b"
                     }
                 ]
             },
@@ -3131,7 +3131,7 @@
                     {
                         "target": "args.*",
                         "operator": "regex",
-                        "value": "[\"']__proto__[\"']\\s*:|\\[\\s*[\"']?__proto__[\"']?\\s*\\]|\\.__proto__\\."
+                        "value": "[\"']__proto__[\"']\\s*:|\\[\\s*[\"']?__proto__[\"']?\\s*\\]|\\.__proto__\\.|\\b__proto__\\b"
                     }
                 ]
             },

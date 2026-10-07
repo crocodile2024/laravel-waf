@@ -47,8 +47,6 @@ final class SqliDetector implements Detector
         '/^[sn](o|&)f\(/',    // '||sleep( / 1-sleep(
         '/^f\([nsv,]*\)[o&;U]/', // sleep(5)# / sleep(5) and
         '/^[sn];?E/',         // 1;SELECT
-        '/^Ek[snbv(]/',       // select from …
-        '/^E[nsvbf(*]/',
         '/^E\(/',
         '/^[sn]o\(E/',        // '=(select
         '/^[sn]&\(E/',        // ' and (select
