@@ -9,14 +9,6 @@ namespace Crocodile2024\WAF\Engine\Detectors;
  */
 final class XssDetector implements Detector
 {
-    private const DANGEROUS_TAGS = [
-        'script', 'iframe', 'frame', 'frameset', 'object', 'embed', 'applet', 'svg', 'math', 'base',
-        'link', 'meta', 'style', 'form', 'isindex', 'xml', 'xss', 'import', 'template', 'portal',
-        'animate', 'set', 'handler', 'listener', 'video', 'audio', 'source', 'img', 'image', 'body',
-        'input', 'button', 'details', 'marquee', 'textarea', 'select', 'keygen', 'html', 'title',
-        'noscript', 'plaintext', 'xmp', 'bgsound', 'layer', 'ilayer', 'vmlframe', 'event-source',
-    ];
-
     private const URL_ATTRIBUTES = [
         'href', 'src', 'action', 'formaction', 'data', 'xlink:href', 'background', 'lowsrc', 'dynsrc',
         'poster', 'codebase', 'srcdoc', 'to', 'values', 'from', 'by', 'attributename', 'style', 'content',

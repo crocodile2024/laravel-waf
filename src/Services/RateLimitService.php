@@ -79,6 +79,9 @@ LUA;
         return new RateLimitResult($allowed, $limit, $remaining, $retry, $window);
     }
 
+    /**
+     * @param  array<string, mixed>  $profile
+     */
     private function buildKey(array $profile, RequestContext $ctx): string
     {
         return match ($profile['key_type']) {

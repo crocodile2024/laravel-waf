@@ -17,9 +17,6 @@ use Illuminate\Support\Str;
  */
 class ProfileResolver
 {
-    /** @var array<string, array<int, array<string, mixed>>>|null */
-    private ?array $rlAssignments = null;
-
     /** @var array<int, array{assignment: ProfileAssignment, profile: InspectionProfile}>|null */
     private ?array $inspectionAssignments = null;
 
@@ -56,7 +53,9 @@ class ProfileResolver
     {
         $profile = $this->inspectionProfile($ctx);
 
-        return $profile?->paranoia_level ?? $this->config->paranoiaLevel();
+        return $profile !== null && $profile->paranoia_level !== null
+            ? $profile->paranoia_level
+            : $this->config->paranoiaLevel();
     }
 
     /**

@@ -25,6 +25,10 @@ class RuleTester
      *
      * @return array{result: string, score: int, threshold: int, matches: array<int, array<string, mixed>>, normalizations: array<int, array<string, mixed>>}
      */
+    /**
+     * @param  array<string, string>  $headers
+     * @return array{result: string, score: int, threshold: int, matches: array<int, array<string, mixed>>, normalizations: array<int, array<string, mixed>>}
+     */
     public function test(string $method, string $path, string $rawBody = '', array $headers = [], ?int $paranoia = null): array
     {
         $query = [];

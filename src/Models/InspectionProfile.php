@@ -7,6 +7,18 @@ namespace Crocodile2024\WAF\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $id
+ * @property string $name
+ * @property ?int $paranoia_level
+ * @property ?int $inbound_threshold
+ * @property ?string $mode_override
+ * @property array<string, mixed>|null $limits
+ * @property array<int, string>|null $allowed_countries
+ * @property array<int, string>|null $denied_countries
+ * @property array<int, int>|null $denied_asns
+ * @property array<string, mixed>|null $upload_rules
+ */
 class InspectionProfile extends Model
 {
     use HasUlids;

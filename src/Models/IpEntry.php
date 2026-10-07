@@ -7,7 +7,19 @@ namespace Crocodile2024\WAF\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property string $list
+ * @property string $cidr
+ * @property string $ip_start
+ * @property string $ip_end
+ * @property string $source
+ * @property ?string $comment
+ * @property Carbon|null $expires_at
+ * @property ?string $created_by
+ */
 class IpEntry extends Model
 {
     use HasUlids;

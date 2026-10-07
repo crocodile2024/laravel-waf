@@ -60,6 +60,9 @@ class EventController extends Controller
 
         return response()->streamDownload(function () use ($query): void {
             $handle = fopen('php://output', 'wb');
+            if ($handle === false) {
+                return;
+            }
             fputcsv($handle, ['Vorfall-ID', 'Zeitpunkt', 'IP', 'Land', 'Methode', 'Pfad', 'Ergebnis', 'Status', 'Score']);
             $query->chunk(500, function ($events) use ($handle): void {
                 foreach ($events as $e) {

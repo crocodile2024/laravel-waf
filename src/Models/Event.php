@@ -6,7 +6,29 @@ namespace Crocodile2024\WAF\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property Carbon|null $occurred_at
+ * @property ?string $ip
+ * @property string $ip_hash
+ * @property ?string $country
+ * @property ?int $asn
+ * @property string $method
+ * @property ?string $host
+ * @property string $path
+ * @property ?string $route_name
+ * @property ?string $user_agent
+ * @property ?string $user_id
+ * @property string $mode
+ * @property string $outcome
+ * @property ?int $status_code
+ * @property int $score
+ * @property array<int, array<string, mixed>>|null $matches
+ * @property ?string $node
+ * @property Carbon|null $anonymized_at
+ */
 class Event extends Model
 {
     use HasUlids;

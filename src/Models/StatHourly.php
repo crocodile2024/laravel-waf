@@ -6,7 +6,16 @@ namespace Crocodile2024\WAF\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property Carbon|null $hour
+ * @property string $outcome
+ * @property string $rule_code
+ * @property string $country
+ * @property int $count
+ */
 class StatHourly extends Model
 {
     use HasUlids;

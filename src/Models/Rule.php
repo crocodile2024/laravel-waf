@@ -6,7 +6,31 @@ namespace Crocodile2024\WAF\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property string $code
+ * @property string $source
+ * @property ?string $pack
+ * @property ?string $pack_version
+ * @property string $name
+ * @property ?string $description
+ * @property string $severity
+ * @property int $paranoia_level
+ * @property int $priority
+ * @property string $phase
+ * @property array<string, mixed> $conditions
+ * @property array<int, string>|null $transforms
+ * @property array<string, mixed> $action
+ * @property ?string $mode_override
+ * @property array<int, string>|null $tags
+ * @property bool $is_active
+ * @property ?string $created_by
+ * @property ?string $updated_by
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
 class Rule extends Model
 {
     use HasUlids;

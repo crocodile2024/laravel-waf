@@ -236,14 +236,14 @@ final class Transformer
         $value = (string) preg_replace_callback(
             '/\\\\u\{?([0-9a-fA-F]{2,6})\}?|\\\\x([0-9a-fA-F]{2})|\\\\([0-7]{1,3})/',
             static function (array $m): string {
-                if (($m[1] ?? '') !== '') {
+                if (isset($m[1]) && $m[1] !== '') {
                     return mb_chr((int) hexdec($m[1]), 'UTF-8') ?: '';
                 }
-                if (($m[2] ?? '') !== '') {
+                if (isset($m[2]) && $m[2] !== '') {
                     return chr((int) hexdec($m[2]));
                 }
 
-                return chr((int) octdec($m[3]) & 0xFF);
+                return chr((int) octdec($m[3] ?? '0') & 0xFF);
             },
             $value,
         );
@@ -259,9 +259,9 @@ final class Transformer
 
         return (string) preg_replace_callback(
             '/\\\\([0-9a-fA-F]{1,6})\s?|\\\\(.)/s',
-            static fn (array $m): string => ($m[1] ?? '') !== ''
+            static fn (array $m): string => isset($m[1]) && $m[1] !== ''
                 ? (mb_chr((int) hexdec($m[1]), 'UTF-8') ?: '')
-                : ($m[2] === "\n" ? '' : $m[2]),
+                : (($m[2] ?? '') === "\n" ? '' : ($m[2] ?? '')),
             $value,
         );
     }
