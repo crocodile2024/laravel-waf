@@ -1,0 +1,60 @@
+{
+    "name": "crocodile2024/laravel-waf",
+    "description": "Anwendungsseitige Web Application Firewall mit Verwaltungsoberfläche für Laravel – self-hosted, DSGVO-konform, clustertauglich.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["laravel", "waf", "firewall", "security", "owasp", "rate-limit"],
+    "require": {
+        "php": "^8.4",
+        "laravel/framework": "^13.0",
+        "predis/predis": "^2.2|^3.0",
+        "geoip2/geoip2": "^3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^4.0",
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.18"
+    },
+    "suggest": {
+        "ext-redis": "Schnellere Redis-Anbindung (Alternative zu predis/predis)",
+        "ext-apcu": "In-Process-Cache für kompilierte Regeln und Konfiguration",
+        "ext-gd": "Bild-Captcha als Fallback ohne JavaScript"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crocodile2024\\WAF\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crocodile2024\\WAF\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Crocodile2024\\WAF\\WAFServiceProvider"
+            ],
+            "aliases": {
+                "WAF": "Crocodile2024\\WAF\\Facades\\WAF"
+            }
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "analyse": "vendor/bin/phpstan analyse --memory-limit=1G",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
