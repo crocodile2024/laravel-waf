@@ -1,0 +1,13 @@
+# code-markdown – gutartige Eingaben (bei Paranoia 1 null Treffer erwartet)
+Nutze `git commit -m "Fix"` zum Committen.
+Die Funktion `array_map($fn, $arr)` ist praktisch.
+In SQL: ORDER BY wird zum Sortieren genutzt (allgemein erklärt).
+Markdown: **fett**, *kursiv*, [Link](https://example.de).
+Beispiel: `SELECT` dient dem Lesen – hier nur als Wort im Fließtext.
+CSS-Regel: .btn { color: #4f46e5; }
+Pfad im Text: siehe Ordner Dokumente/Rechnungen.
+Der Operator && bedeutet „und“ in vielen Sprachen.
+Preisformel: Menge * Einzelpreis = Gesamt.
+Union ist auch ein englisches Wort für Vereinigung.
+Select the best option from the menu, please.
+Unser Shop nutzt sichere Verbindungen (HTTPS).

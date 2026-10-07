@@ -1,0 +1,4 @@
+{
+  "resources/sass/waf.scss": { "file": "waf.css", "src": "resources/sass/waf.scss", "isEntry": true },
+  "resources/js/waf.js": { "file": "waf.js", "src": "resources/js/waf.js", "isEntry": true }
+}

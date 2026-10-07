@@ -1,0 +1,10 @@
+/vendor/
+/node_modules/
+composer.lock
+.phpunit.result.cache
+.phpunit.cache/
+/build/
+.env
+composer.local.json
+composer.local.lock
+build/

