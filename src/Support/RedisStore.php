@@ -284,27 +284,21 @@ LUA;
 
     /**
      * Löscht alle WAF-Schlüssel dieses Präfixes (nur für Tests/Wartung).
+     *
+     * Nutzt den normalen Befehlspfad (KEYS/DEL), damit ein etwaiges
+     * phpredis-Verbindungspräfix konsistent angewandt wird – anders als bei
+     * SCAN innerhalb eines Lua-Skripts.
      */
     public function flushPrefix(): void
     {
-        $this->eval(<<<'LUA'
-local cursor = '0'
-repeat
-  local r = redis.call('SCAN', cursor, 'MATCH', ARGV[1], 'COUNT', 1000)
-  cursor = r[1]
-  for _, k in ipairs(r[2]) do redis.call('DEL', k) end
-until cursor == '0'
-return 1
-LUA, [], [$this->connectionPrefix().$this->prefix.'*']);
-    }
-
-    /**
-     * Präfix der Laravel-Redis-Verbindung (database.redis.options.prefix), falls gesetzt.
-     */
-    private function connectionPrefix(): string
-    {
-        $prefix = config('database.redis.options.prefix');
-
-        return is_string($prefix) ? $prefix : '';
+        $this->attempt(function (Connection $c): void {
+            /** @var array<int, string> $keys */
+            $keys = (array) $c->command('keys', [$this->prefix.'*']);
+            foreach (array_chunk($keys, 500) as $chunk) {
+                if ($chunk !== []) {
+                    $c->command('del', $chunk);
+                }
+            }
+        });
     }
 }
