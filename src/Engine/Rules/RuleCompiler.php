@@ -55,7 +55,7 @@ final class RuleCompiler
         if (! in_array($rule['phase'] ?? 'request', ['request', 'response'], true)) {
             $errors[] = 'Die Phase muss „request“ oder „response“ sein.';
         }
-        if (isset($rule['mode_override']) && $rule['mode_override'] !== null && ! in_array($rule['mode_override'], Mode::values(), true)) {
+        if (($rule['mode_override'] ?? null) !== null && ! in_array($rule['mode_override'], Mode::values(), true)) {
             $errors[] = 'Ungültiger Modus-Override.';
         }
         foreach ((array) ($rule['transforms'] ?? []) as $t) {

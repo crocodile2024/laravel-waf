@@ -9,7 +9,6 @@ use Crocodile2024\WAF\Services\BanService;
 use Crocodile2024\WAF\Services\BotService;
 use Crocodile2024\WAF\Services\ConfigManager;
 use Crocodile2024\WAF\Services\EventRecorder;
-use Crocodile2024\WAF\Services\ExceptionService;
 use Crocodile2024\WAF\Services\GeoIpService;
 use Crocodile2024\WAF\Services\IpListService;
 use Crocodile2024\WAF\Services\LearningService;
@@ -32,7 +31,6 @@ class FirewallEngine
         private readonly ConfigManager $config,
         private readonly RuleRegistry $rules,
         private readonly Inspector $inspector,
-        private readonly ExceptionService $exceptions,
         private readonly IpListService $ipLists,
         private readonly BanService $bans,
         private readonly ReputationService $reputation,

@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 class LimitService
 {
     public function __construct(
-        private readonly ConfigManager $config,
         private readonly ProfileResolver $profiles,
     ) {}
 

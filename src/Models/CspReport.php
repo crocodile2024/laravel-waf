@@ -6,7 +6,19 @@ namespace Crocodile2024\WAF\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property Carbon|null $received_at
+ * @property ?string $document_uri
+ * @property ?string $violated_directive
+ * @property ?string $blocked_uri
+ * @property ?string $source_file
+ * @property ?int $line
+ * @property int $count
+ * @property string $fingerprint
+ */
 class CspReport extends Model
 {
     use HasUlids;

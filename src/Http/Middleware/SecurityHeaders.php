@@ -109,7 +109,10 @@ class SecurityHeaders
             return;
         }
         $allowlist = array_map('strtolower', (array) ($cfg['http_only_allowlist'] ?? []));
-        $sameSite = (string) ($cfg['same_site'] ?? 'lax');
+        $allowedSameSite = ['lax', 'none', 'strict'];
+        $rawSameSite = strtolower((string) ($cfg['same_site'] ?? 'lax'));
+        /** @var 'lax'|'none'|'strict' $sameSite */
+        $sameSite = in_array($rawSameSite, $allowedSameSite, true) ? $rawSameSite : 'lax';
 
         $cookies = $response->headers->getCookies();
         foreach ($cookies as $cookie) {

@@ -186,8 +186,9 @@ final class SqliDetector implements Detector
             // Variablen
             if ($c === '@') {
                 preg_match('/\G@@?[a-z0-9_.$]*/A', $s, $m, 0, $i);
-                $tokens[] = ['v', $m[0]];
-                $i += max(1, strlen($m[0]));
+                $match = $m[0] ?? '';
+                $tokens[] = ['v', $match];
+                $i += max(1, strlen($match));
 
                 continue;
             }
@@ -195,8 +196,9 @@ final class SqliDetector implements Detector
             // Wörter
             if (ctype_alpha($c) || $c === '_' || $c === '$' || ord($c) >= 0x80) {
                 preg_match('/\G[a-z0-9_$.\x80-\xff]+/A', $s, $m, 0, $i);
-                $word = rtrim($m[0], '.');
-                $i += max(1, strlen($m[0]));
+                $match = $m[0] ?? '';
+                $word = rtrim($match, '.');
+                $i += max(1, strlen($match));
                 $next = $this->peekNonSpace($s, $i);
                 $tokens[] = [$this->classifyWord($word, $next), $word];
 
@@ -225,8 +227,9 @@ final class SqliDetector implements Detector
 
             if (str_contains('=<>!+-*/%^&|~:', $c)) {
                 preg_match('/\G[=<>!+\-*\/%^&|~:]+/A', $s, $m, 0, $i);
-                $tokens[] = ['o', $m[0]];
-                $i += max(1, strlen($m[0]));
+                $match = $m[0] ?? '';
+                $tokens[] = ['o', $match];
+                $i += max(1, strlen($match));
 
                 continue;
             }

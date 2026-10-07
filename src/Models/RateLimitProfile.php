@@ -7,6 +7,17 @@ namespace Crocodile2024\WAF\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $id
+ * @property string $name
+ * @property string $key_type
+ * @property ?string $key_header
+ * @property int $limit
+ * @property int $window_seconds
+ * @property int $burst
+ * @property array<string, mixed> $action
+ * @property bool $is_active
+ */
 class RateLimitProfile extends Model
 {
     use HasUlids;

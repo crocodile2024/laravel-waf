@@ -165,7 +165,7 @@ final class RequestContext
         $routeMiddleware = [];
         $routeName = null;
         $routeResolved = false;
-        $routeResolver = static function () use ($request, &$routeMiddleware): ?string {
+        $routeResolver = static function () use ($request): ?string {
             try {
                 $route = $request->route();
                 if ($route === null) {
@@ -195,7 +195,7 @@ final class RequestContext
             method: $method,
             host: strtolower((string) $request->getHost()),
             path: '/'.ltrim(rawurldecode($request->getPathInfo()), '/'),
-            uri: (string) $request->server('REQUEST_URI', $request->getRequestUri()),
+            uri: $request->getRequestUri(),
             query: $query,
             body: $body,
             headers: $headers,

@@ -7,6 +7,16 @@ namespace Crocodile2024\WAF\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $id
+ * @property string $type
+ * @property string $target
+ * @property ?string $secret
+ * @property array<int, string> $events
+ * @property string $min_severity
+ * @property string $digest
+ * @property bool $is_active
+ */
 class NotificationChannel extends Model
 {
     use HasUlids;

@@ -7,7 +7,20 @@ namespace Crocodile2024\WAF\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property string $ip_key
+ * @property string $ip_hash
+ * @property string $reason
+ * @property ?string $rule_code
+ * @property int $level
+ * @property Carbon|null $banned_until
+ * @property Carbon|null $lifted_at
+ * @property ?string $lifted_by
+ * @property string $source
+ */
 class Ban extends Model
 {
     use HasUlids;

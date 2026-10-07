@@ -72,7 +72,7 @@ class WAFServiceProvider extends ServiceProvider
     private function registerMiddleware(): void
     {
         /** @var Router $router */
-        $router = $this->app['router'];
+        $router = $this->app->make('router');
         $router->aliasMiddleware('waf', Firewall::class);
 
         if (! config('waf.enabled', true)) {

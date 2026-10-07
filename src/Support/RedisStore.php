@@ -210,7 +210,9 @@ LUA;
         return $this->attempt(function (Connection $c) use ($script, $keys, $args) {
             $prefixed = array_map($this->key(...), $keys);
 
-            return $c->eval($script, count($prefixed), ...$prefixed, ...$args);
+            // Laravels Redis-Verbindung vereinheitlicht die eval-Signatur
+            // (Skript, Schlüsselanzahl, Schlüssel …, Argumente …) für phpredis und predis.
+            return $c->eval($script, count($prefixed), ...$prefixed, ...$args); // @phpstan-ignore argument.type, argument.type
         });
     }
 
@@ -295,9 +297,7 @@ LUA;
             /** @var array<int, string> $keys */
             $keys = (array) $c->command('keys', [$this->prefix.'*']);
             foreach (array_chunk($keys, 500) as $chunk) {
-                if ($chunk !== []) {
-                    $c->command('del', $chunk);
-                }
+                $c->command('del', $chunk);
             }
         });
     }

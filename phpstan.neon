@@ -6,8 +6,27 @@ parameters:
     paths:
         - src
     tmpDir: build/phpstan
-    checkMissingIterableValueType: true
     reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         # apcu_* nur vorhanden, wenn die Erweiterung geladen ist
         - '#Function apcu_(fetch|store|enabled) not found#'
+        # Konsolen-Ein-/Ausgabe: argument()/option() liefern per Framework mixed
+        -
+            identifier: cast.string
+            path: src/Console/Commands/*
+        -
+            identifier: binaryOp.invalid
+            path: src/Console/Commands/*
+        # Blade-View-Namen sind literale Strings; larastan erwartet view-string
+        -
+            message: '#expects view-string\|null, string given#'
+            paths:
+                - src/Http/Controllers/*
+        # Regex-Capture-Gruppen: PHPStan nimmt Alternationen optimistisch an,
+        # die Laufzeitschutz-Guards (?? / isset) bleiben jedoch nötig.
+        -
+            identifier: isset.offset
+            path: src/Engine/Normalizer/Transformer.php
+        -
+            identifier: nullCoalesce.offset
+            path: src/Engine/Normalizer/Transformer.php
