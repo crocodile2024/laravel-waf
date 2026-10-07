@@ -34,6 +34,60 @@ class BotService
     }
 
     /**
+     * Formular-Honeypot (5.9): ausgefülltes verstecktes Feld oder zu schnelles
+     * Absenden (< min_seconds) ergibt einen Treffer (WAF-BOT-010).
+     */
+    public function honeypotTriggered(RequestContext $ctx): bool
+    {
+        if (! in_array($ctx->method, ['POST', 'PUT', 'PATCH'], true)) {
+            return false;
+        }
+        $token = $ctx->body['waf_hp_token'] ?? null;
+        if (! is_string($token) || $token === '') {
+            return false; // Keine Honeypot-Komponente im Formular
+        }
+
+        // Verstecktes Feld muss leer bleiben
+        $decoy = $ctx->body['waf_hp'] ?? '';
+        if ($decoy !== '') {
+            return true;
+        }
+
+        // Signierter Zeitstempel prüfen
+        $placedAt = $this->verifyTimestamp($token);
+        if ($placedAt === null) {
+            return true; // manipuliertes/fehlendes Token
+        }
+        $minSeconds = (int) $this->config->get('bots.honeypot_min_seconds', 2);
+
+        return (time() - $placedAt) < $minSeconds;
+    }
+
+    private function verifyTimestamp(string $token): ?int
+    {
+        if (! str_contains($token, '.')) {
+            return null;
+        }
+        [$ts, $sig] = explode('.', $token, 2);
+        if (! ctype_digit($ts)) {
+            return null;
+        }
+        $expected = hash_hmac('sha256', $ts, $this->config->pepper());
+
+        return hash_equals($expected, $sig) ? (int) $ts : null;
+    }
+
+    /**
+     * Erzeugt ein signiertes Honeypot-Token (für die Blade-Komponente).
+     */
+    public function honeypotToken(): string
+    {
+        $ts = (string) time();
+
+        return $ts.'.'.hash_hmac('sha256', $ts, $this->config->pepper());
+    }
+
+    /**
      * Prüft, ob der Pfad eine konfigurierte Fallen-Route ist.
      */
     public function trapRoute(RequestContext $ctx): ?string

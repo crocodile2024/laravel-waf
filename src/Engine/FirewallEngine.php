@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Crocodile2024\WAF\Engine;
 
 use Crocodile2024\WAF\Engine\Rules\RuleMatch;
+use Crocodile2024\WAF\Engine\Stages\StageRegistry;
+use Crocodile2024\WAF\Engine\Stages\StageResult;
 use Crocodile2024\WAF\Services\BanService;
 use Crocodile2024\WAF\Services\BotService;
 use Crocodile2024\WAF\Services\ConfigManager;
@@ -13,6 +15,7 @@ use Crocodile2024\WAF\Services\GeoIpService;
 use Crocodile2024\WAF\Services\IpListService;
 use Crocodile2024\WAF\Services\LearningService;
 use Crocodile2024\WAF\Services\LimitService;
+use Crocodile2024\WAF\Services\LoginGuard;
 use Crocodile2024\WAF\Services\ProfileResolver;
 use Crocodile2024\WAF\Services\RateLimitService;
 use Crocodile2024\WAF\Services\ReputationService;
@@ -41,6 +44,8 @@ class FirewallEngine
         private readonly UploadInspector $uploads,
         private readonly ProfileResolver $profiles,
         private readonly LearningService $learning,
+        private readonly LoginGuard $loginGuard,
+        private readonly StageRegistry $stages,
         private readonly EventRecorder $events,
     ) {}
 
@@ -88,6 +93,16 @@ class FirewallEngine
         }
         $this->bots->applyScore($ctx);
 
+        // Honeypot (Formular-Falle, 5.9)
+        if ($this->bots->honeypotTriggered($ctx)) {
+            return $this->decide($ctx, Decision::BLOCK, 'WAF-BOT-010', $mode, 403, 5);
+        }
+
+        // Login-Bruteforce: markierte IP wird herausgefordert (5.8)
+        if (! $ctx->attributes->passCookieValid && $ctx->acceptsHtml && $this->loginGuard->shouldChallenge($ctx->ip)) {
+            return $this->decide($ctx, Decision::CHALLENGE, 'login_bruteforce', $mode, 429);
+        }
+
         // Stufe 11: Normalisierung + Regelauswertung
         $plan = $this->rules->current();
         $learningHits = [];
@@ -117,6 +132,11 @@ class FirewallEngine
         // Sofortaktion (block/challenge/ban/rate_limit) einer Regel
         if ($result->immediate !== null && $result->immediate->type !== 'allow') {
             return $this->applyImmediate($ctx, $result->immediate, $matches, $score, $mode);
+        }
+
+        // Von der Host-App registrierte Stages (WAF::extend())
+        if (($custom = $this->runCustomStages($ctx, $mode)) !== null) {
+            return $custom;
         }
 
         // Stufe 13: Score gegen Schwellwert
@@ -154,6 +174,30 @@ class FirewallEngine
         $result = $this->inspector->evaluate($responseCtx, $plan->response, 4, Mode::Detect);
 
         return $result->matches;
+    }
+
+    /**
+     * Führt zusätzlich registrierte Inspection-Stages aus (WAF::extend()).
+     */
+    private function runCustomStages(RequestContext $ctx, Mode $mode): ?Decision
+    {
+        foreach ($this->stages->all() as $stage) {
+            $result = $stage->handle($ctx);
+            if ($result->disposition === StageResult::STOP) {
+                return $this->clean($ctx, $mode, count: true, outcome: 'allowed');
+            }
+            if ($result->disposition === StageResult::ACT) {
+                $type = match ($result->action) {
+                    'challenge' => Decision::CHALLENGE,
+                    'rate_limit' => Decision::RATE_LIMIT,
+                    default => Decision::BLOCK,
+                };
+
+                return $this->decide($ctx, $type, $result->reason ?? $result->ruleCode, $mode, $result->status, $result->score, $result->matches, $result->ruleCode, $result->retryAfter);
+            }
+        }
+
+        return null;
     }
 
     private function rateLimits(RequestContext $ctx, Mode $mode): ?Decision

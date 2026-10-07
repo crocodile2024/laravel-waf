@@ -7,7 +7,12 @@ die Versionierung an [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unveröffentlicht]
 
 ### Hinzugefügt
-- Erste Implementierung der Web Application Firewall für Laravel 13 / PHP 8.4.
+- Login-Bruteforce-Schutz: Listener auf `Auth\Events\Failed`/`Lockout`, Zählung je
+  IP und je gehashter Benutzerkennung, Challenge ab Schwelle, danach Ban.
+- Formular-Honeypot: Blade-Komponente `<x-waf::honeypot />` (verstecktes Feld +
+  signierter Zeitstempel), Erkennung als `WAF-BOT-010`.
+- Ausführung zusätzlicher, per `WAF::extend()` registrierter Inspection-Stages in der
+  Engine (StageRegistry, `StageResult`: continue/stop/act).- Erste Implementierung der Web Application Firewall für Laravel 13 / PHP 8.4.
 - Request-Normalisierung, SQLi-/XSS-Detektoren, Regel-DSL mit Compiler (ReDoS-Schutz)
   und Matcher.
 - Kernregelpaket `core-v1.json` (SQLI, XSS, LFI, RFI, RCE, PHP, SSRF, XXE, NOSQL,
