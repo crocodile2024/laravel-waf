@@ -10,9 +10,9 @@ use Crocodile2024\WAF\Models\StatHourly;
 use Crocodile2024\WAF\Services\ConfigManager;
 use Crocodile2024\WAF\Services\GeoIpService;
 use Crocodile2024\WAF\Support\RedisStore;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {

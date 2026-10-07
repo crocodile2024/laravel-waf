@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Crocodile2024\WAF\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,9 +27,9 @@ class IpEntry extends Model
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Builder<self>  $query
+     * @param  Builder<self>  $query
      */
-    public function scopeActive(\Illuminate\Database\Eloquent\Builder $query): void
+    public function scopeActive(Builder $query): void
     {
         $query->where(fn ($q) => $q->whereNull('expires_at')->orWhere('expires_at', '>', now()));
     }

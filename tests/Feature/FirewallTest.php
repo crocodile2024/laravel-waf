@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use Crocodile2024\WAF\Models\Rule;
+use Crocodile2024\WAF\Facades\WAF;
+use Crocodile2024\WAF\Services\IpListService;
 use Crocodile2024\WAF\Services\RuleImporter;
 use Crocodile2024\WAF\Services\RuleRegistry;
 use Illuminate\Support\Facades\Route;
@@ -46,12 +47,12 @@ it('does not block in detect mode', function () {
 });
 
 it('respects allowlist', function () {
-    app(\Crocodile2024\WAF\Services\IpListService::class)->add('allow', '127.0.0.1', ['comment' => 'test']);
+    app(IpListService::class)->add('allow', '127.0.0.1', ['comment' => 'test']);
     $this->get('/test-endpoint?'.http_build_query(['q' => "' OR 1=1--"]))->assertOk();
 });
 
 it('blocks denylisted ips', function () {
-    app(\Crocodile2024\WAF\Services\IpListService::class)->add('deny', '127.0.0.1', ['comment' => 'test']);
+    app(IpListService::class)->add('deny', '127.0.0.1', ['comment' => 'test']);
     $this->get('/test-endpoint')->assertStatus(403);
 });
 
@@ -62,7 +63,7 @@ it('sets security headers', function () {
 });
 
 it('bans ip via facade and blocks it', function () {
-    \Crocodile2024\WAF\Facades\WAF::ban('127.0.0.1', 60, 'test');
-    expect(\Crocodile2024\WAF\Facades\WAF::isBanned('127.0.0.1'))->toBeTrue();
+    WAF::ban('127.0.0.1', 60, 'test');
+    expect(WAF::isBanned('127.0.0.1'))->toBeTrue();
     $this->get('/test-endpoint')->assertStatus(403);
 });

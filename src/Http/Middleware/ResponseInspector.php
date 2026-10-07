@@ -10,6 +10,7 @@ use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Services\ConfigManager;
 use Crocodile2024\WAF\Services\EventRecorder;
 use Crocodile2024\WAF\Services\RateLimitService;
+use Crocodile2024\WAF\Services\ReputationService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -76,13 +77,13 @@ class ResponseInspector
             $window = (int) $this->config->get('rate_limit.not_found.window_seconds', 60);
             $limit = (int) $this->config->get('rate_limit.not_found.limit', 30);
             if ($this->rateLimits->countInWindow('404:'.$ctx->ipKey, $window) > $limit) {
-                app(\Crocodile2024\WAF\Services\ReputationService::class)->add($ctx->ip, (int) $this->config->get('rate_limit.not_found.score', 10));
+                app(ReputationService::class)->add($ctx->ip, (int) $this->config->get('rate_limit.not_found.score', 10));
             }
         } elseif ($status >= 400 && $this->config->get('rate_limit.errors.enabled', true)) {
             $window = (int) $this->config->get('rate_limit.errors.window_seconds', 60);
             $limit = (int) $this->config->get('rate_limit.errors.limit', 60);
             if ($this->rateLimits->countInWindow('4xx:'.$ctx->ipKey, $window) > $limit) {
-                app(\Crocodile2024\WAF\Services\ReputationService::class)->add($ctx->ip, (int) $this->config->get('rate_limit.errors.score', 5));
+                app(ReputationService::class)->add($ctx->ip, (int) $this->config->get('rate_limit.errors.score', 5));
             }
         }
     }

@@ -97,7 +97,7 @@ class UploadInspector
         }
 
         // ZIP-Bomben: Kompressionsrate
-        if (in_array($file['extension'], ['zip', 'docx', 'xlsx', 'odt', 'ods', 'jar'], true) && str_starts_with($head, "PK")) {
+        if (in_array($file['extension'], ['zip', 'docx', 'xlsx', 'odt', 'ods', 'jar'], true) && str_starts_with($head, 'PK')) {
             if (($ratio = $this->zipCompressionRatio($file['path'])) !== null
                 && $ratio > (int) $this->config->get('uploads.max_compression_ratio', 100)) {
                 $matches[] = $this->hit('WAF-UPLOAD-009', $field, $file['name'], 'Verdächtige Kompressionsrate (ZIP-Bombe)');

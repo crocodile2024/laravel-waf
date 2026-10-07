@@ -18,6 +18,17 @@ class RuleRequest extends FormRequest
         return Gate::allows('manageWAF');
     }
 
+    protected function prepareForValidation(): void
+    {
+        // Bedingungen/Aktion/Tags kommen aus dem UI als JSON-Strings.
+        $this->merge([
+            'conditions' => $this->decodeJson($this->input('conditions')),
+            'action' => $this->decodeJson($this->input('action')),
+            'tags' => $this->decodeJson($this->input('tags')) ?: $this->input('tags', []),
+            'transforms' => $this->decodeJson($this->input('transforms')) ?: $this->input('transforms', []),
+        ]);
+    }
+
     /**
      * @return array<string, mixed>
      */

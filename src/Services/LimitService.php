@@ -6,6 +6,7 @@ namespace Crocodile2024\WAF\Services;
 
 use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Engine\Rules\RuleMatch;
+use Illuminate\Support\Str;
 
 /**
  * Request-Grenzen (5.12): Methode, URL-/Header-/Parametergrenzen, Host-Allowlist.
@@ -81,7 +82,7 @@ class LimitService
     private function contentTypeAllowed(string $type, array $allowed): bool
     {
         foreach ($allowed as $pattern) {
-            if (\Illuminate\Support\Str::is(strtolower($pattern), $type)) {
+            if (Str::is(strtolower($pattern), $type)) {
                 return true;
             }
         }

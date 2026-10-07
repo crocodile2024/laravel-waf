@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Crocodile2024\WAF\Services;
 
 use Crocodile2024\WAF\Models\Event;
+use Crocodile2024\WAF\Models\StatHourly;
 use Crocodile2024\WAF\Support\RedisStore;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * Schreibt die Ereignis-Warteschlange gebündelt in die DB und aggregiert Statistiken (6.).
@@ -126,14 +128,14 @@ class EventFlusher
                 DB::statement(
                     'INSERT INTO waf_stats_hourly (id, hour, outcome, rule_code, country, count) VALUES (?, ?, ?, ?, ?, ?)
                      ON DUPLICATE KEY UPDATE count = count + VALUES(count)',
-                    [(string) \Illuminate\Support\Str::ulid(), $bucket['hour'], $bucket['outcome'], $bucket['rule_code'], $bucket['country'], $bucket['count']],
+                    [(string) Str::ulid(), $bucket['hour'], $bucket['outcome'], $bucket['rule_code'], $bucket['country'], $bucket['count']],
                 );
             } else {
-                $existing = \Crocodile2024\WAF\Models\StatHourly::query()->where($attributes)->first();
+                $existing = StatHourly::query()->where($attributes)->first();
                 if ($existing !== null) {
                     $existing->increment('count', (int) $bucket['count']);
                 } else {
-                    \Crocodile2024\WAF\Models\StatHourly::query()->create($attributes + ['count' => $bucket['count']]);
+                    StatHourly::query()->create($attributes + ['count' => $bucket['count']]);
                 }
             }
         }

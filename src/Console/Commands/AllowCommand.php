@@ -6,6 +6,7 @@ namespace Crocodile2024\WAF\Console\Commands;
 
 use Crocodile2024\WAF\Services\IpListService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use Throwable;
 
 class AllowCommand extends Command
@@ -19,7 +20,7 @@ class AllowCommand extends Command
         try {
             $lists->add('allow', (string) $this->argument('ip'), [
                 'comment' => $this->option('comment'),
-                'expires_at' => $this->option('until') ? \Illuminate\Support\Carbon::parse((string) $this->option('until')) : null,
+                'expires_at' => $this->option('until') ? Carbon::parse((string) $this->option('until')) : null,
                 'source' => 'manual',
             ]);
             $this->info('Allowlist-Eintrag angelegt: '.$this->argument('ip'));

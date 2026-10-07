@@ -9,7 +9,6 @@ use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Services\ChallengeService;
 use Crocodile2024\WAF\Services\ConfigManager;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as BaseResponse;
 
 /**

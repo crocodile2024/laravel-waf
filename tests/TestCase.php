@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Crocodile2024\WAF\Tests;
 
+use Crocodile2024\WAF\Services\IpListService;
+use Crocodile2024\WAF\Services\RuleRegistry;
+use Crocodile2024\WAF\Services\SettingsRepository;
+use Crocodile2024\WAF\Support\RedisStore;
 use Crocodile2024\WAF\WAFServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -23,6 +27,7 @@ abstract class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
+        $app['config']->set('waf.ui.middleware', ['web']);
         $app['config']->set('waf.pepper', 'test-pepper-0123456789abcdef');
         $app['config']->set('waf.redis.prefix', 'waftest:');
         $app['config']->set('waf.redis.connection', 'waf');
@@ -41,12 +46,12 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-        \Crocodile2024\WAF\Services\RuleRegistry::resetCache();
-        \Crocodile2024\WAF\Services\IpListService::resetCache();
-        $this->app->make(\Crocodile2024\WAF\Services\SettingsRepository::class)->refresh();
+        RuleRegistry::resetCache();
+        IpListService::resetCache();
+        $this->app->make(SettingsRepository::class)->refresh();
 
         try {
-            $this->app->make(\Crocodile2024\WAF\Support\RedisStore::class)->flushPrefix();
+            $this->app->make(RedisStore::class)->flushPrefix();
         } catch (\Throwable) {
             // Redis optional für reine Unit-Tests.
         }

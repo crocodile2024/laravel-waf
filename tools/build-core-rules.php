@@ -7,7 +7,6 @@ declare(strict_types=1);
  *
  * Aufruf: php tools/build-core-rules.php
  */
-
 $T = ['urlDecodeUni', 'htmlEntityDecode', 'utf8Normalize', 'removeNulls', 'lowercase'];
 $TS = [...$T, 'removeComments', 'compressWhitespace'];
 $TX = ['urlDecodeUni', 'htmlEntityDecode', 'jsDecode', 'utf8Normalize', 'removeNulls', 'lowercase'];
@@ -274,7 +273,7 @@ $bt = ['bot'];
 $rules[] = rule('WAF-BOT-001', 'Leerer User-Agent', 'Request ohne User-Agent-Header.', 'notice', 1, 30, $bt, [],
     anyRegex(['user_agent'], '^\s*$'));
 $rules[] = rule('WAF-BOT-002', 'Bibliotheks-User-Agent', 'HTTP-Bibliotheken (python-requests, curl, Go-http-client, …) – nur Score, kein Block (APIs!).', 'notice', 1, 31, $bt, ['lowercase'],
-    anyRegex(['user_agent'], '^(?:python-requests|python-urllib|python-httpx|aiohttp|curl|wget|go-http-client|libwww-perl|lwp::simple|java/|apache-httpclient|okhttp|axios|node-fetch|undici|got \(|scrapy|httpclient|php/|guzzlehttp|ruby|faraday|winhttp|powershell|httpie|insomnia|postmanruntime)', ), ['type' => 'score', 'points' => 2]);
+    anyRegex(['user_agent'], '^(?:python-requests|python-urllib|python-httpx|aiohttp|curl|wget|go-http-client|libwww-perl|lwp::simple|java/|apache-httpclient|okhttp|axios|node-fetch|undici|got \(|scrapy|httpclient|php/|guzzlehttp|ruby|faraday|winhttp|powershell|httpie|insomnia|postmanruntime)'), ['type' => 'score', 'points' => 2]);
 $rules[] = rule('WAF-BOT-003', 'Bekannte Bad-Bots', 'Erkennt aggressive Crawler und Spam-Bots.', 'warning', 1, 32, $bt, ['lowercase'],
     anyRegex(['user_agent'], '\b(?:mj12bot|dotbot|semrushbot|ahrefsbot|blexbot|petalbot|megaindex|seekport|serpstatbot|dataforseobot|zoominfobot|bytespider|claudebot-fake|emailcollector|emailsiphon|webzip|webcopier|httrack|teleport|offline explorer|sitesnagger|extractorpro|harvest|grub|larbin|nutch|pycurl|masscan|zgrab)\b'));
 

@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 /** Erzeugt tests/Fixtures/attacks/*.txt und tests/Fixtures/benign/*.txt. */
-
 $attackDir = __DIR__.'/../tests/Fixtures/attacks';
 $benignDir = __DIR__.'/../tests/Fixtures/benign';
 @mkdir($attackDir, 0775, true);
@@ -17,9 +16,9 @@ $attacks['sqli'] = [
     "' OR 1=1#", '1 OR 1=1', "1' AND 1=1--", "1' AND '1'='1", "' OR 1=1 LIMIT 1--", "') OR ('1'='1",
     "')) OR (('1'='1", "' or true--", "' or ''='", '" or ""="', "1' OR '1'='1' /*",
     "' UNION SELECT NULL--", "' UNION SELECT a,b FROM t--", '1 UNION ALL SELECT 1,2,3,4',
-    "-1 UNION SELECT banner,2,3", "' UNION/**/SELECT/**/a,b/**/FROM/**/t--", "'/**/UNION/**/ALL/**/SELECT/**/1,2--",
-    "1'/*!50000UNION*//*!50000SELECT*/1,2--", "' UnIoN SeLeCt 1,2,3--", "%27%20UNION%20SELECT%20NULL--",
-    "%2527%2520OR%25201%253D1--", '1 /*!12345UNION*/ /*!12345SELECT*/ 1',
+    '-1 UNION SELECT banner,2,3', "' UNION/**/SELECT/**/a,b/**/FROM/**/t--", "'/**/UNION/**/ALL/**/SELECT/**/1,2--",
+    "1'/*!50000UNION*//*!50000SELECT*/1,2--", "' UnIoN SeLeCt 1,2,3--", '%27%20UNION%20SELECT%20NULL--',
+    '%2527%2520OR%25201%253D1--', '1 /*!12345UNION*/ /*!12345SELECT*/ 1',
     '1; DROP TABLE t1--', "'; DROP TABLE t1; --", '1; DELETE FROM acct WHERE 1=1',
     "'; INSERT INTO t (n) VALUES ('x')--", "'; UPDATE t SET role='a' WHERE id=1--",
     "1' AND SLEEP(5)--", "1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--", "' OR SLEEP(5)#",
@@ -32,10 +31,10 @@ $attacks['sqli'] = [
     "1' ORDER BY 1--", "1' ORDER BY 10#", '1 GROUP BY 1,2,3--', "' HAVING 1=1--",
     "' UNION SELECT LOAD_FILE('/etc/hostname')--", "1' || (SELECT CHAR(65)||CHAR(66))--",
     "'||(SELECT banner)||'", "'+(SELECT TOP 1 name FROM sysobjects)+'", "' + CHAR(0x41) + '",
-    '1 AND 1=1', "admin\" --", "' AND @@version LIKE '%MariaDB%", "1'; SELECT pg_sleep(10)--",
+    '1 AND 1=1', 'admin" --', "' AND @@version LIKE '%MariaDB%", "1'; SELECT pg_sleep(10)--",
     "' UNION SELECT NULL,NULL,NULL FROM DUAL--", '1%27%20AND%20%271%27%3D%271',
-    "' AND CHAR(67,65,84)='CAT", "0x31 OR 0x31=0x31", "' oR/**/1=1#", "99999' or '1'='1'='1'='1",
-    "' AND 1 IN (SELECT banner)--", "procedure analyse(extractvalue(1,concat(0x7e,version())),1)",
+    "' AND CHAR(67,65,84)='CAT", '0x31 OR 0x31=0x31', "' oR/**/1=1#", "99999' or '1'='1'='1'='1",
+    "' AND 1 IN (SELECT banner)--", 'procedure analyse(extractvalue(1,concat(0x7e,version())),1)',
 ];
 
 $attacks['xss'] = [
@@ -121,23 +120,23 @@ foreach ($attacks as $name => $payloads) {
 /** Gutartige Eingaben – bei Paranoia 1 null Treffer. */
 $benign = [];
 $benign['deutsch'] = [
-    "Müllers Straße 5", "Das ist Anna's Buch.", "Er sagte: „Guten Tag!“",
-    "Preis: 12,50 € inkl. MwSt.", "Öffnungszeiten: Mo–Fr 9–17 Uhr",
-    "Sehr geehrte Damen und Herren, anbei finden Sie das Angebot.",
-    "Die Bestellung Nr. 2024-0815 wurde versandt.", "Grüße aus Köln & Umgebung",
-    "Rückfragen bitte an unser Büro.", "Das Café ist um die Ecke.",
-    "Herr Dr. Schäfer wird Sie betreuen.", "Viele Grüße, Ihr Team",
-    "Ich hätte gern 3 Stück à 4,99 €.", "Die Lieferung erfolgt in 2–3 Tagen.",
-    "Weißwürste und Brezn für alle!", "Zur Hölle mit den Bugs – jetzt läuft's.",
-    "Angaben gemäß § 5 TMG", "Straße des 17. Juni", "Übermäßige Großschreibung VERMEIDEN.",
-    "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.",
+    'Müllers Straße 5', "Das ist Anna's Buch.", 'Er sagte: „Guten Tag!“',
+    'Preis: 12,50 € inkl. MwSt.', 'Öffnungszeiten: Mo–Fr 9–17 Uhr',
+    'Sehr geehrte Damen und Herren, anbei finden Sie das Angebot.',
+    'Die Bestellung Nr. 2024-0815 wurde versandt.', 'Grüße aus Köln & Umgebung',
+    'Rückfragen bitte an unser Büro.', 'Das Café ist um die Ecke.',
+    'Herr Dr. Schäfer wird Sie betreuen.', 'Viele Grüße, Ihr Team',
+    'Ich hätte gern 3 Stück à 4,99 €.', 'Die Lieferung erfolgt in 2–3 Tagen.',
+    'Weißwürste und Brezn für alle!', "Zur Hölle mit den Bugs – jetzt läuft's.",
+    'Angaben gemäß § 5 TMG', 'Straße des 17. Juni', 'Übermäßige Großschreibung VERMEIDEN.',
+    'Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.',
 ];
 $benign['adressen-emails'] = [
-    "max.mustermann@example.de", "info@platinen-helfer.de", "support+tickets@firma.co.uk",
-    "Telefon: +49 30 12345678", "IBAN: DE89 3704 0044 0532 0130 00 (Beispiel)",
-    "Vorwahl 0221 / 1234567", "PLZ 50667 Köln", "https://www.example.de/produkte?id=42&sort=preis",
-    "Besuchen Sie uns unter example.com/kontakt", "user_name@sub.domain.example.org",
-    "Lieferadresse: Hauptstr. 1a, 10115 Berlin", "USt-IdNr.: DE123456789",
+    'max.mustermann@example.de', 'info@platinen-helfer.de', 'support+tickets@firma.co.uk',
+    'Telefon: +49 30 12345678', 'IBAN: DE89 3704 0044 0532 0130 00 (Beispiel)',
+    'Vorwahl 0221 / 1234567', 'PLZ 50667 Köln', 'https://www.example.de/produkte?id=42&sort=preis',
+    'Besuchen Sie uns unter example.com/kontakt', 'user_name@sub.domain.example.org',
+    'Lieferadresse: Hauptstr. 1a, 10115 Berlin', 'USt-IdNr.: DE123456789',
 ];
 $benign['formular-json'] = [
     '{"name":"Max Mustermann","email":"max@example.de","nachricht":"Bitte rufen Sie mich zurück."}',
@@ -164,12 +163,12 @@ $benign['code-markdown'] = [
     'Unser Shop nutzt sichere Verbindungen (HTTPS).',
 ];
 $benign['suchbegriffe-namen'] = [
-    "O'Brien", "D'Angelo Pizzeria", "L'Oréal Paris", "Jack & Jones Jeans",
-    "AC/DC Konzertkarten", "Müller + Meier GmbH", "Preis-Leistung top",
-    "3/4 Zoll Schlauch", "DIN A4 Papier 80g/m²", "Größe: 42 (EU)",
-    "Modell XR-200 (2024)", "Artikel #12345", "50% Rabatt heute",
-    "Café au lait", "Déjà-vu", "naïve Herangehensweise", "San José",
-    "5*5 Zimmer", "Herr & Frau Schmidt", "e=mc^2 erklärt",
+    "O'Brien", "D'Angelo Pizzeria", "L'Oréal Paris", 'Jack & Jones Jeans',
+    'AC/DC Konzertkarten', 'Müller + Meier GmbH', 'Preis-Leistung top',
+    '3/4 Zoll Schlauch', 'DIN A4 Papier 80g/m²', 'Größe: 42 (EU)',
+    'Modell XR-200 (2024)', 'Artikel #12345', '50% Rabatt heute',
+    'Café au lait', 'Déjà-vu', 'naïve Herangehensweise', 'San José',
+    '5*5 Zimmer', 'Herr & Frau Schmidt', 'e=mc^2 erklärt',
 ];
 
 foreach ($benign as $name => $lines) {

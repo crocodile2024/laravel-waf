@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Crocodile2024\WAF\Engine\Mode;
 use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Engine\Rules\RuleCompiler;
 use Crocodile2024\WAF\Engine\Rules\RuleMatcher;

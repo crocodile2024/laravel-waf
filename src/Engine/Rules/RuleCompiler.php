@@ -7,6 +7,7 @@ namespace Crocodile2024\WAF\Engine\Rules;
 use Crocodile2024\WAF\Engine\Mode;
 use Crocodile2024\WAF\Engine\Normalizer\Transformer;
 use Crocodile2024\WAF\Engine\Scoring\Severity;
+use Crocodile2024\WAF\Support\IpMatcher;
 use Crocodile2024\WAF\Support\IpSet;
 
 /**
@@ -154,7 +155,7 @@ final class RuleCompiler
                         $errors[] = "Bedingung {$n}: Mindestens ein CIDR ist erforderlich.";
                     }
                     foreach ($list as $cidr) {
-                        if (! \Crocodile2024\WAF\Support\IpMatcher::isValidCidr($cidr)) {
+                        if (! IpMatcher::isValidCidr($cidr)) {
                             $errors[] = "Bedingung {$n}: „{$cidr}“ ist keine gültige IP/CIDR.";
                         }
                     }

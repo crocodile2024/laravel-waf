@@ -6,7 +6,6 @@ namespace Crocodile2024\WAF\Console\Commands;
 
 use Crocodile2024\WAF\Services\RuleImporter;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 
 class InstallCommand extends Command

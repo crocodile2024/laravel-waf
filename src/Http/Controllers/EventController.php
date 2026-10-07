@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Crocodile2024\WAF\Http\Controllers;
 
 use Crocodile2024\WAF\Models\Event;
-use Crocodile2024\WAF\Services\BanService;
-use Crocodile2024\WAF\Services\IpListService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -73,7 +71,7 @@ class EventController extends Controller
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder<Event>
+     * @return Builder<Event>
      */
     private function query(Request $request)
     {

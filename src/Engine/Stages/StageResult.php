@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Crocodile2024\WAF\Engine\Stages;
 
+use Crocodile2024\WAF\Engine\Rules\RuleMatch;
+
 /**
  * Ergebnis einer Inspection-Stage.
  *
@@ -20,7 +22,7 @@ final class StageResult
     public const ACT = 'act';
 
     /**
-     * @param  array<int, \Crocodile2024\WAF\Engine\Rules\RuleMatch>  $matches
+     * @param  array<int, RuleMatch>  $matches
      */
     private function __construct(
         public readonly string $disposition,
@@ -44,7 +46,7 @@ final class StageResult
     }
 
     /**
-     * @param  array<int, \Crocodile2024\WAF\Engine\Rules\RuleMatch>  $matches
+     * @param  array<int, RuleMatch>  $matches
      */
     public static function act(
         string $action,

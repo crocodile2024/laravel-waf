@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Crocodile2024\WAF\Engine;
 
-use Crocodile2024\WAF\Engine\Rules\RuleMatch;
 use Crocodile2024\WAF\Engine\Rules\RuleMatcher;
 use Crocodile2024\WAF\Engine\Scoring\ScoreBoard;
 use Crocodile2024\WAF\Services\ExceptionService;

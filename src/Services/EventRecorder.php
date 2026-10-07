@@ -7,8 +7,8 @@ namespace Crocodile2024\WAF\Services;
 use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Engine\Rules\RuleMatch;
 use Crocodile2024\WAF\Support\Anonymizer;
-use Crocodile2024\WAF\Support\RedisStore;
 use Crocodile2024\WAF\Support\Redactor;
+use Crocodile2024\WAF\Support\RedisStore;
 
 /**
  * Schreibt Ereignisse nicht-blockierend in eine Redis-Warteschlange (6.).

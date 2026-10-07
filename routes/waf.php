@@ -7,6 +7,7 @@ use Crocodile2024\WAF\Http\Controllers\CspReportController;
 use Crocodile2024\WAF\Http\Controllers\DashboardController;
 use Crocodile2024\WAF\Http\Controllers\EventController;
 use Crocodile2024\WAF\Http\Controllers\RuleController;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 // Challenge- und CSP-Report-Routen (immer aktiv, von der WAF ausgenommen).
@@ -14,7 +15,7 @@ Route::middleware('web')->group(function (): void {
     Route::get('waf/challenge', [ChallengeController::class, 'show'])->name('waf.challenge.show');
     Route::post('waf/challenge', [ChallengeController::class, 'solve'])->name('waf.challenge.solve');
     Route::post('waf/csp-report', [CspReportController::class, 'store'])
-        ->name('waf.csp-report')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class);
+        ->name('waf.csp-report')->withoutMiddleware(ValidateCsrfToken::class);
 });
 
 // Verwaltungsoberfläche

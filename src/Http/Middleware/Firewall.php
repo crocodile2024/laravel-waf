@@ -15,6 +15,7 @@ use Crocodile2024\WAF\Services\ConfigManager;
 use Crocodile2024\WAF\Services\EventRecorder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
@@ -135,7 +136,7 @@ class Firewall
 
         foreach ($excluded as $pattern) {
             $pattern = trim((string) $pattern, '/');
-            if ($pattern !== '' && ($path === $pattern || \Illuminate\Support\Str::is($pattern, $path))) {
+            if ($pattern !== '' && ($path === $pattern || Str::is($pattern, $path))) {
                 return true;
             }
         }

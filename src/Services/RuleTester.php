@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Crocodile2024\WAF\Services;
 
-use Crocodile2024\WAF\Engine\Mode;
 use Crocodile2024\WAF\Engine\Normalizer\Transformer;
 use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Engine\Rules\RuleMatcher;

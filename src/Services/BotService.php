@@ -6,6 +6,7 @@ namespace Crocodile2024\WAF\Services;
 
 use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Support\RedisStore;
+use Illuminate\Support\Str;
 
 /**
  * Bot-Prüfungen: Fallen-Routen, verifizierte Suchmaschinen-Bots, waf_pass-Cookie (5.9).
@@ -40,7 +41,7 @@ class BotService
         $path = ltrim($ctx->path, '/');
         foreach ((array) $this->config->get('bots.trap_paths', []) as $trap) {
             $trap = ltrim((string) $trap, '/');
-            if ($trap !== '' && ($path === $trap || \Illuminate\Support\Str::is($trap, $path))) {
+            if ($trap !== '' && ($path === $trap || Str::is($trap, $path))) {
                 return $trap;
             }
         }

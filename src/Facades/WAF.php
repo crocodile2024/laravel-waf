@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Mode mode()
  * @method static void extend(string $name, \Closure $factory)
  *
- * @see \Crocodile2024\WAF\WAFManager
+ * @see WAFManager
  */
 final class WAF extends Facade
 {

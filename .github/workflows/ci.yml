@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 10s
+          --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP 8.4 einrichten
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: redis, intl, gd, zip, sqlite3, mbstring, bcmath
+          coverage: none
+
+      - name: Abhängigkeiten installieren
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Pint (Stil)
+        run: vendor/bin/pint --test
+
+      - name: Larastan (Level 8)
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+
+      - name: Tests (Pest)
+        env:
+          WAF_TEST_REDIS: '1'
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
+          WAF_REDIS_DB: 15
+        run: vendor/bin/pest
+
+      - name: Latenz-Budget (p95 <= 2 ms)
+        run: |
+          php vendor/bin/pest tests/Feature/BenchmarkTest.php

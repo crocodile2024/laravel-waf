@@ -29,7 +29,7 @@ test('html entity decode without semicolon', function () {
 
 test('overlong utf8 is normalised', function () {
     $t = new Transformer;
-    expect($t->apply("%c0%ae%c0%ae", ['urlDecodeUni', 'utf8Normalize']))->toBe('..');
+    expect($t->apply('%c0%ae%c0%ae', ['urlDecodeUni', 'utf8Normalize']))->toBe('..');
 });
 
 test('base64 decode only when valid', function () {
