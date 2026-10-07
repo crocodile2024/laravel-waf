@@ -2,11 +2,16 @@
 
 declare(strict_types=1);
 
+use Crocodile2024\WAF\Http\Controllers\AuditController;
+use Crocodile2024\WAF\Http\Controllers\BanController;
 use Crocodile2024\WAF\Http\Controllers\ChallengeController;
 use Crocodile2024\WAF\Http\Controllers\CspReportController;
 use Crocodile2024\WAF\Http\Controllers\DashboardController;
 use Crocodile2024\WAF\Http\Controllers\EventController;
+use Crocodile2024\WAF\Http\Controllers\ExceptionController;
+use Crocodile2024\WAF\Http\Controllers\IpListController;
 use Crocodile2024\WAF\Http\Controllers\RuleController;
+use Crocodile2024\WAF\Http\Controllers\SettingController;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +37,26 @@ if (config('waf.ui.enabled', true)) {
             Route::get('/events/stream', [EventController::class, 'stream'])->name('events.stream');
             Route::get('/events/export', [EventController::class, 'export'])->name('events.export');
             Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+
+            Route::get('/exceptions', [ExceptionController::class, 'index'])->name('exceptions.index');
+            Route::post('/exceptions', [ExceptionController::class, 'store'])->name('exceptions.store');
+            Route::delete('/exceptions/{exception}', [ExceptionController::class, 'destroy'])->name('exceptions.destroy');
+            Route::post('/exceptions/suggestions/{hit}/accept', [ExceptionController::class, 'acceptSuggestion'])->name('exceptions.accept');
+            Route::post('/exceptions/suggestions/{hit}/dismiss', [ExceptionController::class, 'dismissSuggestion'])->name('exceptions.dismiss');
+
+            Route::get('/ip-lists', [IpListController::class, 'index'])->name('ip-lists.index');
+            Route::post('/ip-lists', [IpListController::class, 'store'])->name('ip-lists.store');
+            Route::post('/ip-lists/import', [IpListController::class, 'import'])->name('ip-lists.import');
+            Route::delete('/ip-lists/{ipEntry}', [IpListController::class, 'destroy'])->name('ip-lists.destroy');
+
+            Route::get('/bans', [BanController::class, 'index'])->name('bans.index');
+            Route::post('/bans', [BanController::class, 'store'])->name('bans.store');
+            Route::delete('/bans', [BanController::class, 'destroy'])->name('bans.destroy');
+
+            Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');
+
+            Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+            Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 
             Route::get('/rules', [RuleController::class, 'index'])->name('rules.index');
             Route::get('/rules/create', [RuleController::class, 'create'])->name('rules.create');

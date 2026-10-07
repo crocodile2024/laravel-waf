@@ -50,6 +50,11 @@
             <a class="{{ $r('waf.ui.dashboard') }}" href="{{ route('waf.ui.dashboard') }}">Übersicht</a>
             <a class="{{ $r('waf.ui.events.*') }}" href="{{ route('waf.ui.events.index') }}">Ereignisse</a>
             <a class="{{ $r('waf.ui.rules.*') }}" href="{{ route('waf.ui.rules.index') }}">Regeln</a>
+            <a class="{{ $r('waf.ui.exceptions.*') }}" href="{{ route('waf.ui.exceptions.index') }}">Ausnahmen</a>
+            <a class="{{ $r('waf.ui.ip-lists.*') }}" href="{{ route('waf.ui.ip-lists.index') }}">IP-Listen</a>
+            <a class="{{ $r('waf.ui.bans.*') }}" href="{{ route('waf.ui.bans.index') }}">Sperren</a>
+            <a class="{{ $r('waf.ui.settings.*') }}" href="{{ route('waf.ui.settings.index') }}">Einstellungen</a>
+            <a class="{{ $r('waf.ui.audit.*') }}" href="{{ route('waf.ui.audit.index') }}">Audit-Log</a>
         </nav>
     </aside>
     <div class="main">
