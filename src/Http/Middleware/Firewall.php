@@ -73,6 +73,9 @@ class Firewall
         return $next($request);
     }
 
+    /**
+     * @param  array<array-key, string>  $params
+     */
     private function buildContext(Request $request, array $params): RequestContext
     {
         $ctx = RequestContext::fromRequest($request, [

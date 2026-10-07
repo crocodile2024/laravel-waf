@@ -90,6 +90,8 @@ class IpListService
 
     /**
      * Legt einen Eintrag an (DB) und aktualisiert das Redis-Set.
+     *
+     * @param  array<string, mixed>  $attributes
      */
     public function add(string $list, string $cidr, array $attributes = []): IpEntry
     {

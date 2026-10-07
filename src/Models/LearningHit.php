@@ -6,7 +6,21 @@ namespace Crocodile2024\WAF\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property string $rule_code
+ * @property string $route_name
+ * @property ?string $path_pattern
+ * @property string $parameter
+ * @property int $hit_count
+ * @property int $distinct_ip_count
+ * @property array<int, string>|null $ip_hashes
+ * @property Carbon|null $first_seen_at
+ * @property Carbon|null $last_seen_at
+ * @property string $status
+ */
 class LearningHit extends Model
 {
     use HasUlids;

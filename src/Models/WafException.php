@@ -7,7 +7,20 @@ namespace Crocodile2024\WAF\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property string $id
+ * @property ?string $rule_code
+ * @property ?string $rule_tag
+ * @property string $scope_type
+ * @property ?string $scope_value
+ * @property ?string $parameter
+ * @property ?string $ip_cidr
+ * @property ?string $comment
+ * @property Carbon|null $expires_at
+ * @property ?string $created_by
+ */
 class WafException extends Model
 {
     use HasUlids;

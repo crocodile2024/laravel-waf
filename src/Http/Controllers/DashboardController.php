@@ -117,7 +117,7 @@ class DashboardController extends Controller
         $timeline = StatHourly::query()->where('hour', '>=', $since)
             ->selectRaw('hour, outcome, SUM(count) as total')
             ->groupBy('hour', 'outcome')->get()
-            ->groupBy(fn ($r) => $r->hour->format('Y-m-d H:00'));
+            ->groupBy(fn ($r) => $r->hour?->format('Y-m-d H:00') ?? '');
 
         $topRules = StatHourly::query()->where('hour', '>=', $since)->where('rule_code', '!=', '')
             ->selectRaw('rule_code, SUM(count) as total')->groupBy('rule_code')

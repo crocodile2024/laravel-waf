@@ -8,7 +8,6 @@ use Crocodile2024\WAF\Engine\RequestContext;
 use Crocodile2024\WAF\Engine\Rules\RuleMatch;
 use Crocodile2024\WAF\Models\WafException;
 use Crocodile2024\WAF\Support\IpMatcher;
-use Crocodile2024\WAF\Support\RedisStore;
 use Illuminate\Support\Str;
 
 /**
@@ -22,18 +21,12 @@ class ExceptionService
     /** @var array<int, array<string, mixed>>|null */
     private ?array $compiled = null;
 
-    public function __construct(
-        private readonly ConfigManager $config,
-    ) {}
-
     /**
      * Leere Ausnahmen-Instanz (Tests / Regel-Tester).
      */
     public static function none(): self
     {
-        $instance = new self(new ConfigManager(
-            new SettingsRepository(app(RedisStore::class)),
-        ));
+        $instance = new self;
         $instance->compiled = [];
 
         return $instance;
