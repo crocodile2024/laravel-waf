@@ -53,6 +53,13 @@
             <a class="{{ $r('waf.ui.exceptions.*') }}" href="{{ route('waf.ui.exceptions.index') }}">Ausnahmen</a>
             <a class="{{ $r('waf.ui.ip-lists.*') }}" href="{{ route('waf.ui.ip-lists.index') }}">IP-Listen</a>
             <a class="{{ $r('waf.ui.bans.*') }}" href="{{ route('waf.ui.bans.index') }}">Sperren</a>
+            <a class="{{ $r('waf.ui.rate-limits.*') }}" href="{{ route('waf.ui.rate-limits.index') }}">Rate-Limits</a>
+            <a class="{{ $r('waf.ui.bots.*') }}" href="{{ route('waf.ui.bots.index') }}">Bot-Schutz</a>
+            <a class="{{ $r('waf.ui.geo.*') }}" href="{{ route('waf.ui.geo.index') }}">Geo &amp; ASN</a>
+            <a class="{{ $r('waf.ui.uploads.*') }}" href="{{ route('waf.ui.uploads.index') }}">Uploads</a>
+            <a class="{{ $r('waf.ui.headers.*') }}" href="{{ route('waf.ui.headers.index') }}">Security-Header</a>
+            <a class="{{ $r('waf.ui.profiles.*') }}" href="{{ route('waf.ui.profiles.index') }}">Profile</a>
+            <a class="{{ $r('waf.ui.notifications.*') }}" href="{{ route('waf.ui.notifications.index') }}">Benachrichtigungen</a>
             <a class="{{ $r('waf.ui.settings.*') }}" href="{{ route('waf.ui.settings.index') }}">Einstellungen</a>
             <a class="{{ $r('waf.ui.audit.*') }}" href="{{ route('waf.ui.audit.index') }}">Audit-Log</a>
         </nav>
