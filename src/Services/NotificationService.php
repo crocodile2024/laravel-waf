@@ -6,6 +6,7 @@ namespace Crocodile2024\WAF\Services;
 
 use Crocodile2024\WAF\Engine\Scoring\Severity;
 use Crocodile2024\WAF\Models\NotificationChannel;
+use Crocodile2024\WAF\Notifications\WafNotificationMail;
 use Crocodile2024\WAF\Support\RedisStore;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
@@ -89,20 +90,13 @@ class NotificationService
                 Http::timeout(5)->withHeaders(['X-WAF-Signature' => 'sha256='.$signature, 'Content-Type' => 'application/json'])
                     ->withBody($body, 'application/json')->post($channel->target);
             } elseif ($channel->type === 'mail') {
-                Mail::raw($this->renderMail($eventType, $payload), function ($message) use ($channel, $eventType): void {
-                    $message->to($channel->target)->subject('[WAF] '.$eventType);
-                });
+                $mail = $eventType === 'digest'
+                    ? new WafNotificationMail('digest', period: (string) ($payload['period'] ?? 'hourly'), items: array_map('strval', (array) ($payload['items'] ?? [])))
+                    : new WafNotificationMail($eventType, payload: $payload);
+                Mail::to($channel->target)->send($mail);
             }
         } catch (Throwable) {
             // Benachrichtigungen dürfen den Betrieb nicht stören.
         }
-    }
-
-    /**
-     * @param  array<string, mixed>  $payload
-     */
-    private function renderMail(string $eventType, array $payload): string
-    {
-        return "WAF-Ereignis: {$eventType}\n\n".json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 }

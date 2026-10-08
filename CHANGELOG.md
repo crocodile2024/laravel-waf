@@ -34,6 +34,7 @@ die Versionierung an [Semantic Versioning](https://semver.org/lang/de/).
   Einstellungen und Audit-Log.
 - 18 Artisan-Befehle inkl. `waf:install` und `waf:benchmark`.
 - Clusterverteilung über Versionierung und Redis-Pub/Sub.
-- Benachrichtigungen (Mail, Webhook mit HMAC-Signatur) mit Drosselung und Digest.
+- Benachrichtigungen (Mail, Webhook mit HMAC-Signatur) mit Drosselung und Digest;
+  gestylte Mail-Templates im Designsystem (Deutsch, Link in die Oberfläche).
 - Test-Suite (Pest + Testbench), Angriffs-/Fehlalarm-Korpus, Latenzbudget-Prüfung,
   Larastan Level 8, Pint.
