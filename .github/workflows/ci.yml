@@ -45,3 +45,16 @@ jobs:
       - name: Latenz-Budget (p95 <= 2 ms)
         run: |
           php vendor/bin/pest tests/Feature/BenchmarkTest.php
+
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Abhängigkeiten installieren
+        run: npm ci
+      - name: Assets bauen
+        run: npm run build

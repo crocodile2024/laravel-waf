@@ -1,0 +1,21 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "sass": "^1.80.0",
+        "vite": "^6.0.0"
+    },
+    "dependencies": {
+        "@alpinejs/csp": "^3.14.0",
+        "@fontsource/instrument-serif": "^5.1.0",
+        "@fontsource/jetbrains-mono": "^5.1.0",
+        "@fontsource/plus-jakarta-sans": "^5.1.0",
+        "bootstrap": "^5.3.3",
+        "bootstrap-icons": "^1.11.3",
+        "chart.js": "^4.4.0"
+    }
+}

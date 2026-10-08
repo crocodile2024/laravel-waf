@@ -18,7 +18,15 @@ return [
         'intro' => 'Zum Schutz vor automatisierten Zugriffen führt Ihr Browser eine kleine Rechenaufgabe aus. Dies dauert nur einen Moment.',
         'working' => 'Prüfung läuft …',
         'nojs' => 'Bitte aktivieren Sie JavaScript, um fortzufahren.',
-        'retry' => 'Erneut versuchen',
+        'retry' => 'Die Lösung war nicht korrekt. Bitte versuchen Sie es erneut.',
+        'captcha_fallback' => 'Kein JavaScript? Zur Bildprüfung wechseln.',
+    ],
+    'captcha' => [
+        'intro' => 'Bitte geben Sie die Zeichen aus dem Bild ein, um fortzufahren.',
+        'label' => 'Zeichen aus dem Bild',
+        'submit' => 'Bestätigen',
+        'alt' => 'Sicherheitscode als Bild',
+        'contact_hint' => 'Sie können die Zeichen nicht erkennen? Bitte kontaktieren Sie uns:',
     ],
     'status' => [
         'off' => 'Aus', 'learning' => 'Lernen', 'detect' => 'Erkennen', 'block' => 'Blockieren',

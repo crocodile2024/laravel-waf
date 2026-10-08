@@ -23,6 +23,7 @@ parameters:
             paths:
                 - src/Http/Controllers/*
                 - src/View/Components/*
+                - src/Notifications/*
         # Regex-Capture-Gruppen: PHPStan nimmt Alternationen optimistisch an,
         # die Laufzeitschutz-Guards (?? / isset) bleiben jedoch nötig.
         -

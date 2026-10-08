@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 // Challenge- und CSP-Report-Routen (immer aktiv, von der WAF ausgenommen).
 Route::middleware('web')->group(function (): void {
     Route::get('waf/challenge', [ChallengeController::class, 'show'])->name('waf.challenge.show');
+    Route::get('waf/challenge/captcha', [ChallengeController::class, 'captcha'])->name('waf.challenge.captcha');
+    Route::get('waf/challenge/captcha.png', [ChallengeController::class, 'captchaImage'])->name('waf.challenge.captcha-image');
     Route::post('waf/challenge', [ChallengeController::class, 'solve'])->name('waf.challenge.solve');
     Route::post('waf/csp-report', [CspReportController::class, 'store'])
         ->name('waf.csp-report')->withoutMiddleware(ValidateCsrfToken::class);
