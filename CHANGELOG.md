@@ -21,8 +21,8 @@ die Versionierung an [Semantic Versioning](https://semver.org/lang/de/).
   (off/learning/detect/block).
 - IP-Listen (Allow/Deny), Bans mit Eskalation, IP-Reputation mit Zerfall, Auto-Ban.
 - Rate-Limiting (GCRA), Login-Bruteforce-/404-Flut-Schutz.
-- Bot-Schutz: Suchmaschinen-Verifikation, Proof-of-Work-Challenge, `waf_pass`-Cookie,
-  Fallen-Routen, Formular-Honeypot.
+- Bot-Schutz: Suchmaschinen-Verifikation, Proof-of-Work-Challenge, Bild-Captcha-Fallback
+  (GD, ohne JavaScript), `waf_pass`-Cookie, Fallen-Routen, Formular-Honeypot.
 - Upload-Prüfung inkl. optionalem ClamAV; Security-Header-Middleware mit CSP-Nonce,
   CSP-Report-Endpunkt; optionale Response-Inspektion.
 - Geo-/ASN-Filter über lokale MMDB-Dateien.

@@ -6,6 +6,7 @@ namespace Crocodile2024\WAF\Http\Responses;
 
 use Crocodile2024\WAF\Engine\Decision;
 use Crocodile2024\WAF\Engine\RequestContext;
+use Crocodile2024\WAF\Services\CaptchaService;
 use Crocodile2024\WAF\Services\ChallengeService;
 use Crocodile2024\WAF\Services\ConfigManager;
 use Illuminate\Http\JsonResponse;
@@ -20,6 +21,7 @@ class BlockResponseFactory
     public function __construct(
         private readonly ConfigManager $config,
         private readonly ChallengeService $challenge,
+        private readonly CaptchaService $captcha,
     ) {}
 
     public function blocked(RequestContext $ctx, Decision $decision): BaseResponse
@@ -41,6 +43,17 @@ class BlockResponseFactory
             return $this->render($ctx, 429, 'ratelimit', 'challenge_required', ['Retry-After' => (string) max(1, (int) $decision->retryAfter)]);
         }
 
+        if ($this->config->get('challenge.type', 'pow') === 'captcha' && $this->captcha->available()) {
+            $token = $this->captcha->issue($ctx);
+
+            return response()->view('waf::challenge.captcha', [
+                'incidentId' => $ctx->id,
+                'token' => $token,
+                'target' => $ctx->uri,
+                'contact' => $this->config->get('block_page.contact'),
+            ], 429);
+        }
+
         $task = $this->challenge->issue($ctx);
 
         return response()->view('waf::challenge.pow', [
@@ -48,6 +61,7 @@ class BlockResponseFactory
             'nonce' => $task['nonce'],
             'difficulty' => $task['difficulty'],
             'target' => $ctx->uri,
+            'captchaFallback' => $this->captcha->available(),
             'contact' => $this->config->get('block_page.contact'),
         ], 429);
     }

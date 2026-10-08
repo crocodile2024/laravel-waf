@@ -26,7 +26,12 @@
         <p>{{ trans('waf::waf.challenge.intro', [], 'de') }}</p>
         <div class="spinner" id="waf-spinner" aria-hidden="true"></div>
         <p id="waf-status">{{ trans('waf::waf.challenge.working', [], 'de') }}</p>
-        <noscript><p>{{ trans('waf::waf.challenge.nojs', [], 'de') }}</p></noscript>
+        <noscript>
+            <p>{{ trans('waf::waf.challenge.nojs', [], 'de') }}</p>
+            @if(!empty($captchaFallback))
+                <p><a href="{{ route('waf.challenge.captcha', ['target' => $target]) }}">{{ trans('waf::waf.challenge.captcha_fallback', [], 'de') }}</a></p>
+            @endif
+        </noscript>
         <p><code>{{ $incidentId }}</code></p>
         <form id="waf-form" method="POST" action="{{ route('waf.challenge.solve') }}">
             @csrf
