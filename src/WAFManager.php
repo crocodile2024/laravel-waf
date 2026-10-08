@@ -6,6 +6,7 @@ namespace Crocodile2024\WAF;
 
 use Closure;
 use Crocodile2024\WAF\Engine\Mode;
+use Crocodile2024\WAF\Engine\Stages\StageRegistry;
 use Crocodile2024\WAF\Models\Ban;
 use Crocodile2024\WAF\Models\IpEntry;
 use Crocodile2024\WAF\Services\BanService;
@@ -19,14 +20,12 @@ use DateTimeInterface;
  */
 class WAFManager
 {
-    /** @var array<string, Closure> */
-    private array $stageFactories = [];
-
     public function __construct(
         private readonly BanService $bans,
         private readonly ReputationService $reputation,
         private readonly IpListService $ipLists,
         private readonly ConfigManager $config,
+        private readonly StageRegistry $stages,
     ) {}
 
     public function ban(string $ip, ?int $minutes = null, string $reason = 'manuell'): Ban
@@ -68,14 +67,6 @@ class WAFManager
      */
     public function extend(string $name, Closure $factory): void
     {
-        $this->stageFactories[$name] = $factory;
-    }
-
-    /**
-     * @return array<string, Closure>
-     */
-    public function stageFactories(): array
-    {
-        return $this->stageFactories;
+        $this->stages->register($name, $factory);
     }
 }

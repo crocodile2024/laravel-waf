@@ -7,6 +7,7 @@ namespace Crocodile2024\WAF;
 use Crocodile2024\WAF\Console\Commands;
 use Crocodile2024\WAF\Engine\Inspector;
 use Crocodile2024\WAF\Engine\Rules\RuleCompiler;
+use Crocodile2024\WAF\Engine\Stages\StageRegistry;
 use Crocodile2024\WAF\Http\Middleware\Firewall;
 use Crocodile2024\WAF\Http\Middleware\ResponseInspector;
 use Crocodile2024\WAF\Http\Middleware\SecurityHeaders;
@@ -15,7 +16,11 @@ use Crocodile2024\WAF\Services\SettingsRepository;
 use Crocodile2024\WAF\Support\CspNonce;
 use Crocodile2024\WAF\Support\Redactor;
 use Crocodile2024\WAF\Support\RedisStore;
+use Crocodile2024\WAF\View\Components\Honeypot;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Lockout;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
@@ -46,6 +51,7 @@ class WAFServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(RuleCompiler::class);
+        $this->app->singleton(StageRegistry::class);
 
         $this->app->singleton(WAFManager::class, function ($app): WAFManager {
             return new WAFManager(
@@ -53,6 +59,7 @@ class WAFServiceProvider extends ServiceProvider
                 $app->make(Services\ReputationService::class),
                 $app->make(Services\IpListService::class),
                 $app->make(ConfigManager::class),
+                $app->make(StageRegistry::class),
             );
         });
     }
@@ -66,7 +73,19 @@ class WAFServiceProvider extends ServiceProvider
         $this->registerPublishing();
         $this->registerCommands();
         $this->registerScheduler();
+        $this->registerEventListeners();
         $this->loadRoutes();
+    }
+
+    private function registerEventListeners(): void
+    {
+        if (! config('waf.enabled', true) || ! config('waf.rate_limit.login.enabled', true)) {
+            return;
+        }
+        /** @var Dispatcher $events */
+        $events = $this->app->make('events');
+        $events->listen(Failed::class, [Listeners\RecordFailedLogin::class, 'handleFailed']);
+        $events->listen(Lockout::class, [Listeners\RecordFailedLogin::class, 'handleLockout']);
     }
 
     private function registerMiddleware(): void
@@ -107,6 +126,7 @@ class WAFServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'waf');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'waf');
+        Blade::component('waf::honeypot', Honeypot::class);
     }
 
     private function loadRoutes(): void
