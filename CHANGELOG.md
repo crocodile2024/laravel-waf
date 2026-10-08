@@ -28,6 +28,9 @@ die Versionierung an [Semantic Versioning](https://semver.org/lang/de/).
 - Geo-/ASN-Filter über lokale MMDB-Dateien.
 - Ereignis-Warteschlange mit gebündeltem DB-Flush, Statistikaggregation, Anonymisierung
   und Datenlöschung (DSGVO).
+- Vorkompilierte UI-Assets (Vite): Bootstrap 5.3, Alpine.js (CSP-Build), Chart.js,
+  Bootstrap Icons und alle Schriften lokal; Dashboard-Diagramme (Chart.js) mit
+  barrierefreier Tabellen-Alternative, Live-Ereignis-Polling.
 - Verwaltungsoberfläche: alle 15 Seiten – Dashboard, Ereignisse, Regeln (Editor + Tester),
   Ausnahmen (inkl. Lernmodus-Vorschläge), IP-Listen, Sperren, Rate-Limits, Bot-Schutz,
   Geo & ASN, Uploads, Security-Header (inkl. CSP-Berichte), Profile, Benachrichtigungen,

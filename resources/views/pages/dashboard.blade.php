@@ -34,4 +34,25 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Diagramme: nur mit gebündelten Assets; die darunter liegenden Tabellen bleiben
+         als barrierefreie Alternative immer sichtbar. --}}
+    <h2>Diagramme (7 Tage)</h2>
+    <div x-data="wafDashboard" data-endpoint="{{ route('waf.ui.dashboard.data') }}">
+        <div class="card">
+            <h3 style="margin-top:0;">Zeitverlauf blockiert / protokolliert</h3>
+            <div style="position:relative;height:260px;"><canvas id="waf-chart-timeline" role="img"
+                aria-label="Zeitverlauf blockierter und protokollierter Anfragen"></canvas></div>
+        </div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+            <div class="card">
+                <h3 style="margin-top:0;">Top-10 Regeln</h3>
+                <div style="position:relative;height:240px;"><canvas id="waf-chart-rules" role="img" aria-label="Häufigste Regeltreffer"></canvas></div>
+            </div>
+            <div class="card">
+                <h3 style="margin-top:0;">Top-10 Länder</h3>
+                <div style="position:relative;height:240px;"><canvas id="waf-chart-countries" role="img" aria-label="Häufigste Herkunftsländer"></canvas></div>
+            </div>
+        </div>
+    </div>
 @endsection

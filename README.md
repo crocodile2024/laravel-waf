@@ -24,6 +24,18 @@ composer require crocodile2024/laravel-waf
 php artisan waf:install
 ```
 
+### Assets
+
+Das Paket liefert vorkompilierte Assets in `dist/` mit (Bootstrap 5.3, Alpine.js
+im CSP-Build, Chart.js, Bootstrap Icons, alle Schriften lokal). `waf:install`
+veröffentlicht sie nach `public/vendor/waf/`. Ein eigener Build ist nur bei
+Paketentwicklung nötig:
+
+```bash
+npm ci
+npm run build   # Vite → dist/ (gehashte Dateinamen + manifest.json)
+```
+
 `waf:install` publiziert Config, Assets und Migrationen, führt die Migration aus,
 erzeugt den `WAF_PEPPER`, importiert die Kernregeln und gibt den Gate-Schnipsel aus.
 

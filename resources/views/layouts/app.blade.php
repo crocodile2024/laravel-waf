@@ -6,7 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'WAF' }} · WAF</title>
     @php($mode = app(\Crocodile2024\WAF\Services\ConfigManager::class)->mode())
-    <link rel="stylesheet" href="{{ asset('vendor/waf/waf.css') }}" {!! waf_nonce() !!}>
+    @php($wafCss = waf_asset('resources/js/waf.js', 'css'))
+    @php($wafJs = waf_asset('resources/js/waf.js'))
+    @if($wafCss)<link rel="stylesheet" href="{{ $wafCss }}" {!! waf_nonce() !!}>@endif
+    @if($wafJs)<script type="module" src="{{ $wafJs }}" {!! waf_nonce() !!}></script>@endif
     <style {!! waf_nonce() !!}>
         :root{--bg:#f5f4f0;--fg:#1f2430;--primary:#4f46e5;--muted:#6b7280;--card:#fff;--border:rgba(31,36,48,.08);}
         *{box-sizing:border-box;}
